@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-sans: "IBM Plex Sans", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --bg-page: #ffffff;
+  --bg-subtle: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-dark-main: #0b1322;
+  --bg-dark-secondary: #111c2e;
+  --bg-dark-surface: #162337;
+  --text-dark-heading: #f5f7fa;
+  --text-dark-muted: #aab4c2;
+  --border-dark: #263448;
+  --text-main: #0f172a;
+  --text-body: #475569;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --brand-red: #dc2626;
+  --brand-red-hover: #b91c1c;
+}
+
+/* Subtle Fine-Grain Midnight Blue Automotive Environment with Soft Radial Depth */
+.bg-grainy-midnight {
+  background-color: #0b1322;
+  background-image: 
+    radial-gradient(ellipse 120% 90% at 50% -10%, rgba(22, 35, 55, 0.7), rgba(11, 19, 34, 1)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.bg-midnight-card {
+  background-color: #111c2e;
+}
+
+.bg-midnight-surface {
+  background-color: #162337;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbars */
+.custom-scroller::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scroller::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.custom-scroller::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.custom-scroller::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Infinite Marquee Sliding Animations */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 80s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 80s linear infinite;
+}
+
+
+
+/* Tata Motors Style Upward Text & Card Scroll Reveal (Coming From Bottom) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Moving Mild Gradient Background Animation */
+@keyframes movingGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-moving-gradient-light {
+  background-size: 240% 240%;
+  animation: movingGradient 18s ease infinite;
+}
+
+/* Print styling */
+@media print {
+
+  header,
+  footer,
+  button,
+  .no-print {
+    display: none !important;
+  }
+}
