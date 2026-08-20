@@ -229,7 +229,7 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                   >
                     <div>
                       {/* Image Viewport Container */}
-                      <div className="aspect-[4/3] bg-slate-50 border border-slate-200 rounded-2xl mb-4 p-4 flex items-center justify-center relative overflow-hidden shadow-inner">
+                      <div className="aspect-[3/4] sm:aspect-[4/5] bg-slate-50 border border-slate-200 rounded-2xl mb-4 p-3 sm:p-4 flex items-center justify-center relative overflow-hidden shadow-inner">
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
@@ -422,11 +422,11 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
                 {/* Left Image Column */}
-                <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center justify-between shadow-inner space-y-3">
+                <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center justify-between shadow-inner space-y-3 min-h-[300px] sm:min-h-[340px]">
                   <img
                     src={activeDetailProduct.imageUrl}
                     alt={activeDetailProduct.name}
-                    className="max-h-56 sm:max-h-64 w-auto object-contain hover:scale-105 transition-transform duration-300"
+                    className="max-h-72 sm:max-h-80 w-auto object-contain hover:scale-105 transition-transform duration-300"
                   />
                   <span className="px-3 py-1 bg-slate-900 text-white font-mono font-bold text-xs uppercase rounded-full shadow-md">
                     PART NUMBER: {activeDetailProduct.partNo}
