@@ -242,10 +242,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                         <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors line-clamp-1 font-heading">
                           {prod.name}
                         </h3>
-
-                        <p className="text-xs text-slate-600 font-sans">
-                          Vehicle Fitment: <strong className="text-slate-900 font-extrabold">{prod.vehicleModel}</strong>
-                        </p>
                       </div>
                     </div>
 
