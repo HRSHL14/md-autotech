@@ -161,12 +161,12 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
                     className="bg-white border border-slate-200 rounded-3xl p-5 hover:border-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden h-full"
                   >
                     <div>
-                      {/* Image Viewport Container */}
-                      <div className="aspect-[3/4] sm:aspect-[4/5] bg-slate-50 border border-slate-200 rounded-2xl mb-4 p-3 sm:p-4 flex items-center justify-center relative overflow-hidden shadow-inner">
+                      {/* Image Viewport Container: Exact 934x1400 aspect ratio */}
+                      <div className="aspect-[934/1400] w-full bg-slate-50 border border-slate-200 rounded-2xl mb-3 flex items-center justify-center relative overflow-hidden shadow-inner">
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
-                          className="max-h-full max-w-full object-contain -scale-x-[1.3] sm:-scale-x-[1.28] scale-y-[1.3] sm:scale-y-[1.28] group-hover:-scale-x-[1.35] group-hover:scale-y-[1.35] transition-transform duration-300 drop-shadow-sm"
+                          className="w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm"
                           loading="lazy"
                         />
                         <span className="absolute top-3 left-3 px-2.5 py-1 bg-slate-900 text-white font-mono font-bold text-[10px] uppercase rounded-full shadow-sm">

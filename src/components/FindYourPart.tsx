@@ -92,7 +92,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
             <ScrollReveal key={idx} direction="up" delay={100 + idx * 100} className="w-full flex justify-center">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2.5 relative overflow-hidden h-full w-full max-w-[235px] sm:max-w-[265px] lg:max-w-[280px] mx-auto shadow-xs"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2 relative overflow-hidden h-full w-full max-w-[210px] sm:max-w-[230px] lg:max-w-[245px] mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
                 <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-1.5 border-b border-slate-100">
@@ -103,12 +103,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   </div>
                 </div>
 
-                {/* Dedicated Product Photography Visual Area */}
-                <div className="aspect-[3/4] max-h-48 sm:max-h-56 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
+                {/* Dedicated Product Photography Visual Area: Exact 934x1400 aspect ratio */}
+                <div className="aspect-[934/1400] w-full bg-slate-50 border border-slate-200/90 rounded-xl sm:rounded-2xl flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain -scale-x-[1.3] sm:-scale-x-[1.28] scale-y-[1.3] sm:scale-y-[1.28] sm:group-hover:-scale-x-[1.35] sm:group-hover:scale-y-[1.35] transition-transform duration-300 drop-shadow-sm"
+                    className="w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm"
                     loading="lazy"
                   />
                 </div>
