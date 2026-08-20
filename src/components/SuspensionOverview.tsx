@@ -14,8 +14,7 @@ interface SuspensionOverviewProps {
 export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isInView, setIsInView] = useState(false);
+  const [soundStarted, setSoundStarted] = useState(false);
 
   // Full Headline Pairings for smooth slide-up fade transition
   const headlines = [
@@ -48,33 +47,15 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
     video.muted = true;
     video.playbackRate = 1.3;
 
-    let isVisibleOnScreen = false;
-
     // Observe the SECTION element for play/pause lifecycle
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            isVisibleOnScreen = true;
-            setIsInView(true);
             if (!document.hidden) {
-              // Attempt unmuted audio playback on entering section
-              video.muted = false;
-              setIsMuted(false);
-              video.play().then(() => {
-                setIsPlaying(true);
-              }).catch(() => {
-                // If browser blocks unmuted audio before first gesture, fallback to muted
-                video.muted = true;
-                setIsMuted(true);
-                video.play().then(() => setIsPlaying(true)).catch(() => {});
-              });
+              video.play().then(() => setIsPlaying(true)).catch(() => {});
             }
           } else {
-            isVisibleOnScreen = false;
-            setIsInView(false);
-            video.muted = true;
-            setIsMuted(true);
             video.pause();
             setIsPlaying(false);
           }
@@ -85,34 +66,12 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
 
     observer.observe(section);
 
-    // Ensure audio unmutes seamlessly on user interaction while in view
-    const handleUserInteraction = () => {
-      if (isVisibleOnScreen && videoRef.current && videoRef.current.muted) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        videoRef.current.play().catch(() => {});
-      }
-    };
-
-    window.addEventListener('click', handleUserInteraction, { passive: true });
-    window.addEventListener('scroll', handleUserInteraction, { passive: true });
-    window.addEventListener('wheel', handleUserInteraction, { passive: true });
-    window.addEventListener('keydown', handleUserInteraction, { passive: true });
-
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        video.muted = true;
-        setIsMuted(true);
         video.pause();
         setIsPlaying(false);
-      } else if (isVisibleOnScreen) {
-        video.muted = false;
-        setIsMuted(false);
-        video.play().then(() => setIsPlaying(true)).catch(() => {
-          video.muted = true;
-          setIsMuted(true);
-          video.play().catch(() => {});
-        });
+      } else {
+        video.play().then(() => setIsPlaying(true)).catch(() => {});
       }
     };
 
@@ -121,20 +80,16 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
     return () => {
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('click', handleUserInteraction);
-      window.removeEventListener('scroll', handleUserInteraction);
-      window.removeEventListener('wheel', handleUserInteraction);
-      window.removeEventListener('keydown', handleUserInteraction);
     };
   }, []);
 
-  // Click for sound handler: unmutes video audio on user gesture and removes button
+  // Click for sound handler: unmutes video audio on user gesture and permanently removes button
   const handleSoundToggle = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (videoRef.current) {
       videoRef.current.muted = false;
-      setIsMuted(false);
       videoRef.current.play().catch(() => {});
+      setSoundStarted(true);
     }
   };
 
@@ -188,11 +143,11 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
       {/* 4. Right Hero Text Overlay Content */}
       <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 pb-36 sm:pb-44 lg:pb-52 relative z-20 flex justify-end mt-auto">
         <div className="max-w-2xl space-y-4 sm:space-y-6 text-right flex flex-col items-end">
-          {/* Mobile & Tablet Click for Sound Button: Visible only when muted, removed on click */}
-          {isMuted && (
+          {/* Click for Sound Button: Visible until user clicks to enable audio */}
+          {!soundStarted && (
             <button
               onClick={handleSoundToggle}
-              className="lg:hidden inline-flex items-center gap-2 px-4 py-2 bg-slate-950/85 backdrop-blur-md border border-emerald-400/50 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/80 hover:border-emerald-400 active:scale-95 shadow-xl group z-30 mb-1 animate-bounce"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-950/85 backdrop-blur-md border border-emerald-400/60 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/90 hover:border-emerald-400 active:scale-95 shadow-xl group z-30 mb-1 animate-bounce"
               aria-label="Click for Sound"
             >
               <Volume2 className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
