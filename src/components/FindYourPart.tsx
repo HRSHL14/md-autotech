@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../data';
 import ScrollReveal from './ScrollReveal';
@@ -113,9 +112,9 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   />
                 </div>
 
-                {/* Product Details & Right-Side View Button */}
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-1.5">
-                  <div className="space-y-0.5 text-left min-w-0 flex-1">
+                {/* Product Details */}
+                <div className="pt-2 border-t border-slate-100">
+                  <div className="space-y-0.5 text-left min-w-0">
                     <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
                       {prod.name}
                     </h3>
@@ -123,34 +122,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                       {prod.category}
                     </p>
                   </div>
-
-                  {/* Compact View CTA Button on Right */}
-                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-mono font-black text-red-600 uppercase tracking-wider bg-red-50 sm:group-hover:bg-red-600 sm:group-hover:text-white px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full transition-all duration-300 shrink-0 border border-red-200/80 sm:group-hover:border-red-600 shadow-2xs">
-                    <span>VIEW</span>
-                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-red-600 sm:group-hover:text-white sm:group-hover:translate-x-0.5 transition-all" />
-                  </div>
                 </div>
 
               </div>
             </ScrollReveal>
           ))}
         </div>
-
-        {/* Single Strong Section CTA */}
-        <ScrollReveal direction="up" delay={500}>
-          <div className="text-center flex justify-center pt-2">
-            <button
-              onClick={() => {
-                if (setActiveTab) setActiveTab('products');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="cursor-pointer px-8 py-4 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg shadow-red-950/20 hover:shadow-xl transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-3 group border border-red-500/40"
-            >
-              <span>VIEW COMPLETE PRODUCT RANGE</span>
-              <ArrowRight className="w-4.5 h-4.5 text-white group-hover:translate-x-1 transition-transform shrink-0" />
-            </button>
-          </div>
-        </ScrollReveal>
 
       </div>
     </section>
