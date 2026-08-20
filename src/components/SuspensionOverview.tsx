@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, ChevronDown, Volume2, VolumeX } from 'lucide-react';
+import { ArrowRight, ChevronDown, Volume2 } from 'lucide-react';
 
 interface SuspensionOverviewProps {
   setActiveTab: (tab: string) => void;
@@ -128,18 +128,13 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
     };
   }, []);
 
-  // Floating sound icon tap handler (mobile only)
+  // Click for sound handler: unmutes video audio on user gesture and removes button
   const handleSoundToggle = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (videoRef.current) {
-      if (videoRef.current.muted) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        videoRef.current.play().catch(() => {});
-      } else {
-        videoRef.current.muted = true;
-        setIsMuted(true);
-      }
+      videoRef.current.muted = false;
+      setIsMuted(false);
+      videoRef.current.play().catch(() => {});
     }
   };
 
@@ -193,29 +188,20 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
       {/* 4. Right Hero Text Overlay Content */}
       <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 pb-36 sm:pb-44 lg:pb-52 relative z-20 flex justify-end mt-auto">
         <div className="max-w-2xl space-y-4 sm:space-y-6 text-right flex flex-col items-end">
-          {/* Mobile & Tablet Click for Sound Button directly above headline */}
-          <button
-            onClick={handleSoundToggle}
-            className="lg:hidden inline-flex items-center gap-2 px-4 py-2 bg-slate-950/85 backdrop-blur-md border border-emerald-400/50 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/80 hover:border-emerald-400 active:scale-95 shadow-xl group z-30 mb-1"
-            aria-label={isMuted ? 'Click for Sound' : 'Mute Video Sound'}
-          >
-            {isMuted ? (
-              <>
-                <Volume2 className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300 animate-pulse" />
-                <span className="text-[11px] sm:text-xs font-mono font-black uppercase tracking-wider text-emerald-400 group-hover:text-white">
-                  CLICK FOR SOUND
-                </span>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              </>
-            ) : (
-              <>
-                <VolumeX className="w-4 h-4 text-slate-300 group-hover:text-white" />
-                <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-slate-300 group-hover:text-white">
-                  MUTE SOUND
-                </span>
-              </>
-            )}
-          </button>
+          {/* Mobile & Tablet Click for Sound Button: Visible only when muted, removed on click */}
+          {isMuted && (
+            <button
+              onClick={handleSoundToggle}
+              className="lg:hidden inline-flex items-center gap-2 px-4 py-2 bg-slate-950/85 backdrop-blur-md border border-emerald-400/50 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/80 hover:border-emerald-400 active:scale-95 shadow-xl group z-30 mb-1 animate-bounce"
+              aria-label="Click for Sound"
+            >
+              <Volume2 className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
+              <span className="text-[11px] sm:text-xs font-mono font-black uppercase tracking-wider text-emerald-400 group-hover:text-white">
+                CLICK FOR SOUND
+              </span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            </button>
+          )}
           
           {/* Large Headline with Full Text Smooth Slide & Fade Transition */}
           <div className={`transition-all duration-500 transform ${
