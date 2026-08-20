@@ -233,7 +233,7 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
-                          className="max-h-full max-w-full object-contain scale-[1.7] group-hover:scale-[1.8] transition-transform duration-300 drop-shadow-md"
+                          className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                           loading="lazy"
                         />
                         <span className="absolute top-3 left-3 px-2.5 py-1 bg-slate-900 text-white font-mono font-bold text-[10px] uppercase rounded-full shadow-sm">

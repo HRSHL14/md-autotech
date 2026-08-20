@@ -67,12 +67,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
   };
 
   return (
-    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 py-12 sm:py-0 sm:h-screen flex flex-col justify-center relative overflow-hidden" id="featured-products-preview">
+    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 py-14 sm:py-20 lg:py-24 relative overflow-hidden" id="featured-products-preview">
       {/* Rich Automotive Micro-Dot Grid & Technical Grid Texture */}
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8 lg:space-y-10 relative z-10 w-full my-auto">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10 lg:space-y-12 relative z-10 w-full">
         
         {/* Section Header with Upward Scroll Reveal */}
         <ScrollReveal direction="up" delay={0}>
@@ -87,15 +87,15 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
         </ScrollReveal>
 
         {/* 4 Featured Automotive Catalogue Cards Grid with Staggered Upward Scroll Reveal */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center sm:justify-items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 justify-items-center sm:justify-items-stretch">
           {featuredProducts.map((prod, idx) => (
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full max-w-[310px] sm:max-w-none">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-3 relative overflow-hidden h-full w-full mx-auto"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-4 relative overflow-hidden h-full w-full mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
-                <div className="flex items-center justify-between font-sans text-xs pb-2 border-b border-slate-100">
+                <div className="flex items-center justify-between font-sans text-xs pb-2.5 border-b border-slate-100">
                   <span className="font-extrabold text-red-600 uppercase tracking-wide">{prod.brand}</span>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-3 bg-red-600 rounded-full" />
@@ -104,11 +104,11 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Dedicated Product Photography Visual Area */}
-                <div className="h-64 sm:h-72 lg:h-80 bg-slate-50 border border-slate-200 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div className="h-48 sm:h-56 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-3 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain scale-[1.9] sm:scale-[1.8] sm:group-hover:scale-[1.92] transition-transform duration-300 drop-shadow-md"
+                    className="max-h-full max-w-full object-contain sm:group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                     loading="lazy"
                   />
                 </div>
