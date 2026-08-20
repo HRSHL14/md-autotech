@@ -26,7 +26,7 @@ export default function Footer({ activeTab = 'home', setActiveTab, onOpenQuoteMo
     badge: 'Registered Office & Commercial Enquiries',
     address: 'D 207, Roongta Central Park, Behind Tractor House, Dwarka, Nashik - 422001, Maharashtra, India',
     hours: 'Mon – Sat: 9:00 AM – 7:00 PM',
-    embedUrl: 'https://maps.google.com/maps?q=Roongta+Central+Park+Dwarka+Nashik+422001&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    embedUrl: 'https://maps.google.com/maps?q=19.988019,73.799714&z=15&output=embed',
     directUrl: 'https://maps.google.com/?q=Roongta+Central+Park+Dwarka+Nashik+422001',
   };
 
