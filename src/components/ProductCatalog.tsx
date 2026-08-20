@@ -246,18 +246,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                         <p className="text-xs text-slate-600 font-sans">
                           Vehicle Fitment: <strong className="text-slate-900 font-extrabold">{prod.vehicleModel}</strong>
                         </p>
-
-                        {/* Technical Spec Cards */}
-                        <div className="grid grid-cols-2 gap-2.5 text-xs font-sans pt-2">
-                          <div className="bg-white/90 p-2.5 rounded-xl border border-slate-200/80 shadow-xs">
-                            <span className="text-[10px] font-mono text-slate-400 block uppercase font-bold">DAMPING TYPE</span>
-                            <span className="text-slate-900 font-bold text-[11px] block mt-0.5 leading-tight">{prod.technicalDetails.dampingType}</span>
-                          </div>
-                          <div className="bg-white/90 p-2.5 rounded-xl border border-slate-200/80 shadow-xs">
-                            <span className="text-[10px] font-mono text-slate-400 block uppercase font-bold">PRELOAD</span>
-                            <span className="text-slate-900 font-bold text-[11px] block mt-0.5 leading-tight">Adjustable</span>
-                          </div>
-                        </div>
                       </div>
                     </div>
 
