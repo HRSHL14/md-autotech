@@ -67,16 +67,16 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
   };
 
   return (
-    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 min-h-screen py-10 sm:py-0 sm:h-screen flex flex-col justify-center relative overflow-hidden" id="featured-products-preview">
+    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 min-h-screen py-12 sm:py-16 flex flex-col justify-center relative" id="featured-products-preview">
       {/* Rich Automotive Micro-Dot Grid & Technical Grid Texture */}
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-4 sm:space-y-6 lg:space-y-6 relative z-10 w-full my-auto pt-4 sm:pt-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-4 sm:space-y-6 relative z-10 w-full my-auto">
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0}>
-          <div className="text-center max-w-4xl mx-auto space-y-1.5 pt-1 sm:pt-2">
+          <div className="text-center max-w-4xl mx-auto space-y-1.5">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight sm:whitespace-nowrap">
               Explore Our <span className="text-red-600">Suspension Solutions</span>
             </h2>
@@ -87,15 +87,15 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
         </ScrollReveal>
 
         {/* 4 Featured Automotive Catalogue Cards Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto justify-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 max-w-6xl mx-auto justify-center">
           {featuredProducts.map((prod, idx) => (
-            <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
+            <ScrollReveal key={idx} direction="up" delay={100 + idx * 100} className="w-full flex justify-center">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-3 relative overflow-hidden h-full w-full max-w-[235px] sm:max-w-[265px] lg:max-w-[280px] mx-auto shadow-xs"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2.5 relative overflow-hidden h-full w-full max-w-[235px] sm:max-w-[265px] lg:max-w-[280px] mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
-                <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-2 border-b border-slate-100">
+                <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-1.5 border-b border-slate-100">
                   <span className="font-extrabold text-red-600 uppercase tracking-wide truncate">{prod.brand}</span>
                   <div className="flex items-center gap-1 shrink-0">
                     <span className="w-1.5 h-2.5 bg-red-600 rounded-full" />
@@ -104,7 +104,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Dedicated Product Photography Visual Area */}
-                <div className="aspect-[3/4] max-h-56 sm:max-h-64 lg:max-h-72 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2.5 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div className="aspect-[3/4] max-h-48 sm:max-h-56 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
@@ -114,7 +114,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Product Details */}
-                <div className="pt-2 border-t border-slate-100">
+                <div className="pt-1.5 border-t border-slate-100">
                   <div className="space-y-0.5 text-left min-w-0">
                     <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
                       {prod.name}
@@ -130,21 +130,19 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           ))}
         </div>
 
-        {/* Common View Products Button */}
-        <ScrollReveal direction="up" delay={500}>
-          <div className="text-center flex justify-center pt-3 sm:pt-4 lg:pt-5">
-            <button
-              onClick={() => {
-                if (setActiveTab) setActiveTab('products');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="cursor-pointer px-9 py-3.5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg shadow-red-950/20 hover:shadow-xl transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-red-500/40"
-            >
-              <span>VIEW PRODUCTS</span>
-              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </ScrollReveal>
+        {/* Common View Products Button - Visible directly */}
+        <div className="text-center flex justify-center pt-2 sm:pt-4">
+          <button
+            onClick={() => {
+              if (setActiveTab) setActiveTab('products');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="cursor-pointer px-9 py-3.5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg shadow-red-950/20 hover:shadow-xl transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-red-500/40"
+          >
+            <span>VIEW PRODUCTS</span>
+            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
 
       </div>
     </section>
