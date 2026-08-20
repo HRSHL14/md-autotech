@@ -58,9 +58,17 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
             isVisibleOnScreen = true;
             setIsInView(true);
             if (!document.hidden) {
+              // Attempt unmuted audio playback on entering section
+              video.muted = false;
+              setIsMuted(false);
               video.play().then(() => {
                 setIsPlaying(true);
-              }).catch(() => {});
+              }).catch(() => {
+                // If browser blocks unmuted audio before first gesture, fallback to muted
+                video.muted = true;
+                setIsMuted(true);
+                video.play().then(() => setIsPlaying(true)).catch(() => {});
+              });
             }
           } else {
             isVisibleOnScreen = false;
@@ -77,6 +85,20 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
 
     observer.observe(section);
 
+    // Ensure audio unmutes seamlessly on user interaction while in view
+    const handleUserInteraction = () => {
+      if (isVisibleOnScreen && videoRef.current && videoRef.current.muted) {
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        videoRef.current.play().catch(() => {});
+      }
+    };
+
+    window.addEventListener('click', handleUserInteraction, { passive: true });
+    window.addEventListener('scroll', handleUserInteraction, { passive: true });
+    window.addEventListener('wheel', handleUserInteraction, { passive: true });
+    window.addEventListener('keydown', handleUserInteraction, { passive: true });
+
     const handleVisibilityChange = () => {
       if (document.hidden) {
         video.muted = true;
@@ -84,7 +106,13 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
         video.pause();
         setIsPlaying(false);
       } else if (isVisibleOnScreen) {
-        video.play().then(() => setIsPlaying(true)).catch(() => {});
+        video.muted = false;
+        setIsMuted(false);
+        video.play().then(() => setIsPlaying(true)).catch(() => {
+          video.muted = true;
+          setIsMuted(true);
+          video.play().catch(() => {});
+        });
       }
     };
 
@@ -93,10 +121,14 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
     return () => {
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('click', handleUserInteraction);
+      window.removeEventListener('scroll', handleUserInteraction);
+      window.removeEventListener('wheel', handleUserInteraction);
+      window.removeEventListener('keydown', handleUserInteraction);
     };
   }, []);
 
-  // Floating sound icon tap handler
+  // Floating sound icon tap handler (mobile only)
   const handleSoundToggle = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (videoRef.current) {
@@ -136,7 +168,7 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
           playsInline
           webkit-playsinline="true"
           preload="auto"
-          className="w-full h-full object-cover object-center lg:-translate-x-[22%] scale-110 filter brightness-135 contrast-115 saturate-[1.10]"
+          className="w-full h-full object-cover object-center lg:-translate-x-[18%] scale-[1.1] sm:scale-[1.4] lg:scale-[1.45] filter brightness-135 contrast-115 saturate-[1.10] transition-transform duration-700"
         >
           <source src="/videos/susp-vid-new.mp4" type="video/mp4" />
           <source src="/videos/explosion-view.mp4" type="video/mp4" />
@@ -162,11 +194,11 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
       <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 pb-36 sm:pb-44 lg:pb-52 relative z-20 flex justify-end mt-auto">
         <div className="max-w-2xl space-y-4 sm:space-y-6 text-right flex flex-col items-end">
 
-          {/* Compact Sleek Green "Click for Sound" Button — Shifted Upward */}
+          {/* Mobile-Only Sound Button (Hidden on Laptop / PC) */}
           {isInView && isMuted && (
             <button
               onClick={handleSoundToggle}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950/85 backdrop-blur-md border border-emerald-400/40 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/70 hover:border-emerald-400 hover:scale-105 shadow-md group mb-3 sm:mb-5 -translate-y-2 sm:-translate-y-4 z-30"
+              className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 bg-slate-950/85 backdrop-blur-md border border-emerald-400/40 rounded-full text-white cursor-pointer transition-all duration-300 hover:bg-emerald-950/70 hover:border-emerald-400 hover:scale-105 shadow-md group mb-3 sm:mb-5 -translate-y-2 sm:-translate-y-4 z-30"
               aria-label="Enable sound"
             >
               <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 group-hover:text-emerald-300 animate-pulse" />
@@ -221,3 +253,4 @@ export default function SuspensionOverview({ setActiveTab }: SuspensionOverviewP
     </section>
   );
 }
+

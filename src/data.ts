@@ -367,6 +367,6 @@ export const B2B_FAQS = [
   },
   {
     question: 'How can I request a formal product catalogue or wholesale price sheet?',
-    answer: 'You can download our digital product summary in the Resources section or request a formal commercial quotation through our Contact page or direct WhatsApp business support channel (+91 70307 27770).',
+    answer: 'You can request a formal commercial quotation and product catalogue through our Wholesale Quote form or direct WhatsApp business support channel (+91 70307 27770).',
   },
 ];

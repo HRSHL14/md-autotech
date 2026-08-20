@@ -76,7 +76,7 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
       {/* Invisible Top Hover Sensor Zone to trigger Header on mouseover near screen top */}
       <div
         onMouseEnter={() => setIsVisible(true)}
-        className="fixed top-0 left-0 right-0 h-6 z-40 pointer-events-auto"
+        className="fixed top-0 left-0 right-0 h-6 z-30 pointer-events-auto"
       />
 
       <header
@@ -86,7 +86,7 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
             setIsVisible(false);
           }
         }}
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 transform bg-white ${
+        className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 transform bg-white ${
           isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
         } ${isScrolled ? 'shadow-md border-b border-slate-200' : 'border-b border-slate-200'}`}
         id="app-header"
@@ -115,9 +115,9 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
             id="brand-logo"
           >
             <img
-              src="/md-autotech-logo.png"
+              src="/MD AUTOTECH (1).png"
               alt="MD AutoTech Automotive Suspension"
-              className="h-12 sm:h-18 md:h-24 w-auto object-contain scale-[1.5] sm:scale-125 origin-left"
+              className="h-12 sm:h-18 md:h-24 w-auto object-contain scale-[1.5] sm:scale-105 origin-left"
             />
           </div>
 
@@ -129,10 +129,10 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`cursor-pointer px-2.5 py-2 text-[13px] font-extrabold uppercase tracking-wider transition-colors border-b-2 ${
+                  className={`cursor-pointer px-2 xl:px-3 py-1 text-base xl:text-lg font-black uppercase tracking-tight transition-colors border-b-2 ${
                     isActive
-                      ? 'text-red-600 border-red-600 font-black'
-                      : 'text-slate-700 hover:text-red-600 border-transparent'
+                      ? 'text-red-600 border-red-600'
+                      : 'text-slate-800 hover:text-red-600 border-transparent'
                   }`}
                   id={`nav-${item.id}`}
                 >
@@ -150,7 +150,7 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
                 if (onOpenQuoteModal) onOpenQuoteModal();
                 else setActiveTab('contact');
               }}
-              className="hidden sm:flex cursor-pointer px-6 py-2.5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all items-center gap-2 border border-red-500/40"
+              className="hidden sm:flex cursor-pointer px-6 py-2.5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all items-center gap-2 border border-red-500/40"
               id="header-contact-cta"
             >
               <span>GET QUOTATION</span>
@@ -187,8 +187,8 @@ export default function Header({ activeTab, setActiveTab, onOpenQuoteModal }: He
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left px-3 py-2 text-sm font-extrabold uppercase ${
-                    activeTab === item.id ? 'bg-slate-100 text-red-600 font-black' : 'text-slate-800 hover:bg-slate-50'
+                  className={`text-left px-3 py-2.5 text-lg font-black uppercase ${
+                    activeTab === item.id ? 'bg-slate-100 text-red-600' : 'text-slate-900 hover:bg-slate-50'
                   }`}
                 >
                   {item.label}

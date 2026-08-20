@@ -12,7 +12,7 @@ export default function BrandLogoMarquee() {
     { name: 'Bajaj Auto', logo: '/logos/bajaj.svg', tag: 'Bajaj Platina & Comfortec' },
     { name: 'TVS Motor Company', logo: '/logos/tvs.svg', tag: 'TVS Star City+ Series' },
     { name: 'Yamaha India', logo: '/logos/yamaha.svg', tag: 'Yamaha Crux & RX100' },
-    { name: 'MD AutoTech', logo: '/md-autotech-logo.png', tag: 'OEM Dampers & Shocks' },
+    { name: 'MD AutoTech', logo: '/MD AUTOTECH (1).png', tag: 'OEM Dampers & Shocks' },
   ];
 
   // Duplicate for seamless infinite loop across 3 rows

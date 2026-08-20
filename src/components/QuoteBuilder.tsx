@@ -66,119 +66,136 @@ export default function QuoteBuilder({ initialProductName = '', initialBusinessT
     <div className="w-full bg-white py-2 max-w-4xl mx-auto" id="quick-quote-form">
       
       {/* Section Header */}
-      <div className="border-b border-slate-200 pb-3 mb-4">
-        <span className="text-xs font-mono font-bold text-red-600 uppercase tracking-widest block mb-0.5">
-          ✦ GET A QUICK QUOTE
-        </span>
-        <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-heading tracking-tight">
-          Looking for MD AutoTech products? Tell us what you need.
-        </h1>
+      <div className="border-b border-slate-200 pb-2 mb-3 flex items-center justify-between pr-24 sm:pr-28">
+        <div>
+          <span className="text-[10px] font-mono font-bold text-red-600 uppercase tracking-widest block">
+            ✦ GET A QUICK QUOTE
+          </span>
+          <h1 className="text-xs sm:text-sm font-extrabold text-slate-900 font-heading tracking-tight leading-tight">
+            Tell us what you need — MD AutoTech Wholesale Desk
+          </h1>
+        </div>
       </div>
 
       {submitted ? (
-        <div className="bg-slate-50 border border-slate-200 p-6 sm:p-8 text-center rounded-xl max-w-2xl mx-auto space-y-3 shadow-sm">
+        <div className="bg-slate-50 border border-slate-200 p-5 sm:p-6 text-center rounded-2xl max-w-xl mx-auto space-y-3 shadow-sm">
           <div className="w-10 h-10 bg-red-600 text-white font-bold text-lg flex items-center justify-center rounded-full mx-auto">
             <CheckCircle2 className="w-5 h-5" />
           </div>
-          <h2 className="text-xl font-black uppercase text-slate-900 font-heading">
+          <h2 className="text-lg font-black uppercase text-slate-900 font-heading">
             Quote Request Received
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
+          <p className="text-slate-600 text-xs leading-relaxed font-sans">
             Thank you, <strong className="text-slate-900">{customerName}</strong>. We’ll contact you with availability, pricing, and supply details for <strong className="text-slate-900">{currentProdObj.partNo} — {currentProdObj.name}</strong>.
           </p>
 
-          <div className="pt-3 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5 justify-center">
+          <div className="pt-2 border-t border-slate-200 flex flex-col sm:flex-row gap-2 justify-center">
             <button
               onClick={triggerWhatsApp}
-              className="cursor-pointer px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-full transition-all shadow-md"
+              className="cursor-pointer px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 rounded-xl transition-all shadow-sm"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Chat on WhatsApp</span>
             </button>
             <button
               onClick={triggerEmailInvoice}
-              className="cursor-pointer px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-full transition-all shadow-md"
+              className="cursor-pointer px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 rounded-xl transition-all shadow-sm"
             >
               <Mail className="w-4 h-4 text-white" />
-              <span>Send Invoice via Email</span>
+              <span>Send Email</span>
             </button>
             <button
               onClick={() => setSubmitted(false)}
-              className="cursor-pointer px-5 py-2.5 border border-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-full hover:border-slate-400 transition-colors"
+              className="cursor-pointer px-4 py-2 border border-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl hover:border-slate-400 transition-colors"
             >
-              Submit Another Quote
+              Back
             </button>
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4 bg-white border border-slate-200 p-4 sm:p-6 rounded-2xl shadow-sm relative overflow-hidden">
-          {/* Subtle Texture Overlay */}
+        <form onSubmit={handleSubmit} className="space-y-3 bg-white border border-slate-200/90 p-3.5 sm:p-4 rounded-2xl shadow-xs relative overflow-hidden">
+          {/* Subtle Background Texture */}
           <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
           
-          {/* 1. WHAT DO YOU NEED? */}
-          <div className="space-y-2 pb-3 border-b border-slate-200/80">
-            <h3 className="text-[11px] font-mono font-black text-red-600 uppercase tracking-widest">
-              1. WHAT DO YOU NEED?
-            </h3>
-            
+          {/* STEP 1. SELECTED PRODUCT */}
+          <div className="pb-2.5 border-b border-slate-200/80">
             {!isChangingProduct ? (
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-white border border-slate-200/90 rounded-xl shadow-xs">
-                <span className="font-mono font-bold text-slate-900 text-xs sm:text-sm">
-                  {currentProdObj.partNo} — {currentProdObj.name}
-                </span>
+              <div className="flex items-center justify-between gap-3 p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-9 h-9 bg-white border border-slate-200 rounded-lg p-0.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+                    <img
+                      src={currentProdObj.imageUrl}
+                      alt={currentProdObj.name}
+                      className="max-h-full max-w-full object-contain scale-110"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="px-1.5 py-0.5 bg-red-600 text-white font-mono font-extrabold text-[8px] uppercase rounded shrink-0">
+                      {currentProdObj.brand}
+                    </span>
+                    <span className="font-heading font-black text-slate-900 text-xs uppercase truncate">
+                      {currentProdObj.partNo} — {currentProdObj.name}
+                    </span>
+                  </div>
+                </div>
+
                 <button
                   type="button"
                   onClick={() => setIsChangingProduct(true)}
-                  className="cursor-pointer text-xs font-mono font-bold text-red-600 hover:text-red-700 underline text-left sm:text-right"
+                  className="cursor-pointer text-[10px] font-mono font-extrabold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded-md transition-all shrink-0"
                 >
-                  [ Change Product ]
+                  Change Product
                 </button>
               </div>
             ) : (
-              <div className="space-y-1.5">
+              <div className="space-y-1 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <div className="flex items-center justify-between">
+                  <label className="block text-[10px] font-mono font-bold text-slate-700 uppercase">
+                    Select Product from Catalog:
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setIsChangingProduct(false)}
+                    className="text-[10px] font-mono font-bold text-slate-500 hover:text-slate-900 underline"
+                  >
+                    Done
+                  </button>
+                </div>
                 <select
                   value={selectedProduct}
                   onChange={(e) => {
                     setSelectedProduct(e.target.value);
                     setIsChangingProduct(false);
                   }}
-                  className="w-full py-2 px-3 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-900 focus:outline-none focus:border-red-600"
+                  className="w-full py-1.5 px-3 bg-white border border-slate-300 rounded-lg text-xs font-sans text-slate-900 focus:outline-none focus:border-red-600"
                 >
                   {PRODUCTS.map((p) => (
                     <option key={p.id} value={p.name}>
-                      {p.partNo} — {p.name} ({p.brand})
+                      {p.partNo} — {p.name} ({p.brand.toUpperCase()})
                     </option>
                   ))}
                 </select>
-                <button
-                  type="button"
-                  onClick={() => setIsChangingProduct(false)}
-                  className="text-[11px] font-mono text-slate-500 hover:text-slate-800 underline block"
-                >
-                  Done selecting
-                </button>
               </div>
             )}
           </div>
 
-          {/* 2 & 3. HOW MUCH & WHO ARE YOU? (2 COLUMNS ON DESKTOP) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-3 border-b border-slate-200/80">
-            
-            {/* 2. HOW MUCH? */}
-            <div className="space-y-2">
-              <h3 className="text-[11px] font-mono font-black text-red-600 uppercase tracking-widest">
-                2. HOW MUCH? (APPROX. QTY)
-              </h3>
-              <div className="grid grid-cols-4 gap-2">
+          {/* STEP 2. QUANTITY & BUSINESS CATEGORY (2 COLS) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-2.5 border-b border-slate-200/80">
+            {/* QUANTITY */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-mono font-bold text-slate-700 uppercase">
+                1. Approx. Order Qty (Units)
+              </label>
+              <div className="grid grid-cols-4 gap-1">
                 {['50', '100', '500+', 'Not Sure'].map((qty) => (
                   <button
                     type="button"
                     key={qty}
                     onClick={() => setQuantityTier(qty)}
-                    className={`cursor-pointer py-2 text-xs font-mono font-bold rounded-xl border transition-all text-center ${
+                    className={`cursor-pointer py-1.5 px-1 text-xs font-sans transition-all text-center rounded-lg border ${
                       quantityTier === qty
-                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                        : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                        ? 'bg-red-600 text-white font-black border-red-600 shadow-xs'
+                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 font-semibold'
                     }`}
                   >
                     {qty}
@@ -187,21 +204,21 @@ export default function QuoteBuilder({ initialProductName = '', initialBusinessT
               </div>
             </div>
 
-            {/* 3. WHO ARE YOU? */}
-            <div className="space-y-2">
-              <h3 className="text-[11px] font-mono font-black text-red-600 uppercase tracking-widest">
-                3. WHO ARE YOU?
-              </h3>
-              <div className="grid grid-cols-4 gap-2">
+            {/* BUSINESS TYPE */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-mono font-bold text-slate-700 uppercase">
+                2. Business Category
+              </label>
+              <div className="grid grid-cols-4 gap-1">
                 {['Dealer', 'Distributor', 'Retailer', 'Workshop'].map((type) => (
                   <button
                     type="button"
                     key={type}
                     onClick={() => setBusinessType(type)}
-                    className={`cursor-pointer py-2 text-xs font-mono font-bold rounded-xl border transition-all text-center ${
+                    className={`cursor-pointer py-1.5 px-1 text-xs font-sans transition-all text-center rounded-lg border ${
                       businessType === type
-                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                        : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                        ? 'bg-red-600 text-white font-black border-red-600 shadow-xs'
+                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 font-semibold'
                     }`}
                   >
                     {type}
@@ -209,119 +226,78 @@ export default function QuoteBuilder({ initialProductName = '', initialBusinessT
                 ))}
               </div>
             </div>
-
           </div>
 
-          {/* YOUR DETAILS */}
-          <div className="space-y-3 pb-3 border-b border-slate-200/80">
-            <h3 className="text-[11px] font-mono font-black text-red-600 uppercase tracking-widest">
-              YOUR DETAILS
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          {/* STEP 3. CONTACT DETAILS (2x2 GRID) */}
+          <div className="space-y-2 pb-2.5 border-b border-slate-200/80">
+            <label className="block text-[10px] font-mono font-bold text-slate-700 uppercase">
+              3. Contact Details
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div>
-                <label className="block text-[10px] font-extrabold text-slate-900 uppercase font-mono mb-0.5">
-                  Name *
-                </label>
                 <input
                   type="text"
                   required
-                  placeholder="Your name"
+                  placeholder="Full Name *"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-red-600"
+                  className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-sans text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-600"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-extrabold text-slate-900 uppercase font-mono mb-0.5">
-                  Business Name
-                </label>
                 <input
                   type="text"
-                  placeholder="Your business name"
+                  placeholder="Business / Firm Name"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-red-600"
+                  className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-sans text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-600"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-extrabold text-slate-900 uppercase font-mono mb-0.5">
-                  WhatsApp Number *
-                </label>
                 <input
                   type="tel"
                   required
-                  placeholder="+91 ___________"
+                  placeholder="WhatsApp / Phone Number *"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-900 focus:outline-none focus:border-red-600"
+                  className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-600"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-extrabold text-slate-900 uppercase font-mono mb-0.5">
-                  Email Address
-                </label>
                 <input
                   type="email"
-                  placeholder="your.email@company.com"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-red-600"
+                  className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-sans text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-red-600"
                 />
               </div>
             </div>
           </div>
 
-          {/* ANYTHING ELSE? */}
-          <div className="space-y-1.5 pb-3 border-b border-slate-200/80">
-            <h3 className="text-[11px] font-mono font-black text-red-600 uppercase tracking-widest">
-              ANYTHING ELSE?
-            </h3>
-            <textarea
-              rows={2}
-              placeholder="Tell us what you're looking for..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-red-600"
-            />
-          </div>
-
           {/* SUBMIT ACTIONS */}
-          <div className="space-y-3 text-center pt-1">
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="pt-1 space-y-1.5">
+            <div className="flex flex-col sm:flex-row items-center gap-2">
               <button
                 type="submit"
-                className="flex-1 w-full cursor-pointer py-3.5 px-5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 border border-red-500/40"
+                className="flex-1 w-full cursor-pointer py-2.5 px-4 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center gap-2 border border-red-500/40"
               >
-                <span>GET MY QUOTE</span>
-                <ArrowRight className="w-4 h-4 text-white" />
-              </button>
-
-              <button
-                type="button"
-                onClick={triggerEmailInvoice}
-                className="flex-1 w-full cursor-pointer py-3.5 px-5 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-full transition-all shadow-md border border-slate-700"
-              >
-                <Mail className="w-4 h-4 text-white" />
-                <span>SEND INVOICE VIA EMAIL</span>
+                <span>SUBMIT QUOTE REQUEST</span>
+                <ArrowRight className="w-3.5 h-3.5 text-white" />
               </button>
 
               <button
                 type="button"
                 onClick={triggerWhatsApp}
-                className="flex-1 w-full cursor-pointer py-3.5 px-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-full transition-all shadow-md"
+                className="flex-1 w-full cursor-pointer py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-xl transition-all shadow-md"
               >
-                <MessageSquare className="w-4 h-4 text-white" />
+                <MessageSquare className="w-3.5 h-3.5 text-white" />
                 <span>CHAT ON WHATSAPP</span>
               </button>
             </div>
-
-            <p className="text-[11px] text-slate-500 font-sans italic">
-              We’ll contact you with availability, pricing, and supply details.
-            </p>
           </div>
 
         </form>

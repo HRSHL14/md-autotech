@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HeroVideoBanner from './components/HeroVideoBanner';
@@ -12,17 +13,14 @@ import BrandLogoMarquee from './components/BrandLogoMarquee';
 import CorporateVisionMission from './components/CorporateVisionMission';
 import FindYourPart from './components/FindYourPart';
 import B2BPartnersSection from './components/B2BPartnersSection';
-import ApplicationsView from './components/ApplicationsView';
 import ProductCatalog from './components/ProductCatalog';
 import QualityAssurance from './components/QualityAssurance';
 import ManufacturingCapabilities from './components/ManufacturingCapabilities';
 import AboutUs from './components/AboutUs';
-import ResourcesView from './components/ResourcesView';
 import QuoteBuilder from './components/QuoteBuilder';
-import OwnerDesk from './components/OwnerDesk';
 import { PRODUCTS } from './data';
 import { Product } from './types';
-import { X, ArrowRight, CheckCircle2, MessageSquare, Phone, Mail, MapPin } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
@@ -52,8 +50,18 @@ export default function App() {
       document.body.scrollTop = 0;
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && quoteModalOpen) {
+        setQuoteModalOpen(false);
+      }
+    };
+
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [quoteModalOpen]);
 
   const handleTabChange = (tab: string) => {
@@ -136,16 +144,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: APPLICATIONS MATRIX */}
-        {activeTab === 'applications' && (
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6">
-            <ApplicationsView
-              onSelectProduct={handleSelectProductFromFitment}
-              onOpenQuoteModal={(prodName) => handleOpenQuoteModal(prodName)}
-            />
-          </div>
-        )}
-
         {/* TAB 4: QUALITY ASSURANCE */}
         {activeTab === 'quality' && (
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6">
@@ -169,35 +167,25 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 7: RESOURCES & FAQS */}
-        {activeTab === 'resources' && (
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6">
-            <ResourcesView
-              onOpenQuoteModal={() => handleOpenQuoteModal()}
-            />
-          </div>
-        )}
-
-        {/* TAB 9: OWNER DESK (INTERNAL PORTAL) */}
-        {activeTab === 'owner-desk' && (
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6">
-            <OwnerDesk />
-          </div>
-        )}
-
       </main>
 
       {/* 3. Global Wholesale Quote Modal */}
-      {quoteModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-200/90 max-w-4xl w-full max-h-[92vh] sm:max-h-none overflow-y-auto sm:overflow-visible rounded-3xl p-5 sm:p-8 shadow-2xl relative space-y-3">
+      {quoteModalOpen && createPortal(
+        <div
+          onClick={() => setQuoteModalOpen(false)}
+          className="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border border-slate-200/90 max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-4 sm:p-7 shadow-2xl relative space-y-3 my-auto cursor-default"
+          >
             <button
               onClick={() => setQuoteModalOpen(false)}
-              className="absolute top-5 right-5 px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md transition-all border border-slate-700 flex items-center gap-1.5 cursor-pointer z-20 group hover:scale-105"
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-full shadow-md transition-all border border-slate-700 flex items-center gap-1 cursor-pointer z-30 group hover:scale-105"
               aria-label="Close modal"
             >
               <span>CLOSE</span>
-              <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:rotate-90 transition-transform duration-300" />
             </button>
 
             <QuoteBuilder
@@ -208,7 +196,8 @@ export default function App() {
               }}
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* 4. Footer Component */}

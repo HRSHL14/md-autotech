@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, Filter, ArrowRight, CheckCircle2, ChevronRight, Download, X, MessageSquare, Shield } from 'lucide-react';
 import { PRODUCTS } from '../data';
 import { Product } from '../types';
@@ -49,6 +50,17 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
     }
     return true;
   });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (activeDetailProduct) setActiveDetailProduct(null);
+        if (mobileFilterOpen) setMobileFilterOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeDetailProduct, mobileFilterOpen]);
 
   return (
     <div className="w-full space-y-6 sm:space-y-8 bg-[#F8FAFC] border border-slate-200 py-6 sm:py-8 px-4 sm:px-8 max-w-[1440px] mx-auto rounded-3xl mt-20 sm:mt-24 lg:mt-28 mb-8 relative overflow-hidden shadow-xs" id="products-catalog-view">
@@ -293,9 +305,15 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
         </div>
 
         {/* 4. Mobile Bottom Filter Drawer */}
-        {mobileFilterOpen && (
-          <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-end justify-center lg:hidden">
-            <div className="bg-white border-t border-slate-200 w-full max-h-[85vh] overflow-y-auto rounded-t-3xl p-6 space-y-5 shadow-2xl relative">
+        {mobileFilterOpen && createPortal(
+          <div
+            onClick={() => setMobileFilterOpen(false)}
+            className="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-sm flex items-end justify-center lg:hidden cursor-pointer"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white border-t border-slate-200 w-full max-h-[85vh] overflow-y-auto rounded-t-3xl p-6 space-y-5 shadow-2xl relative cursor-default"
+            >
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <span className="text-sm font-mono font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
                   <Filter className="w-4 h-4 text-red-600" />
@@ -375,13 +393,20 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
               </div>
 
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
         {/* 5. Product Detail Modal */}
-        {activeDetailProduct && (
-          <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4">
-            <div className="bg-white border border-slate-200 max-w-4xl w-full max-h-[92vh] sm:max-h-none overflow-y-auto sm:overflow-visible rounded-3xl p-5 sm:p-8 shadow-2xl relative space-y-4">
+        {activeDetailProduct && createPortal(
+          <div
+            onClick={() => setActiveDetailProduct(null)}
+            className="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 cursor-pointer"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white border border-slate-200 max-w-4xl w-full max-h-[92vh] overflow-y-auto rounded-3xl p-5 sm:p-8 shadow-2xl relative space-y-4 my-auto cursor-default"
+            >
               
               {/* Close CTA Button */}
               <button
@@ -503,7 +528,8 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
               </div>
 
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
       </div>

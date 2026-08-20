@@ -6,6 +6,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Product } from '../types';
+import { PRODUCTS } from '../data';
 import ScrollReveal from './ScrollReveal';
 
 interface FindYourPartProps {
@@ -14,10 +15,11 @@ interface FindYourPartProps {
   onOpenQuoteModal?: (productName: string) => void;
 }
 
-export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
+export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYourPartProps) {
   // 4 Featured products covering major OEM brands
   const featuredProducts = [
     {
+      id: 'md2031',
       brand: 'HERO',
       name: 'HR PASSION PLATED',
       partNo: 'MD2031',
@@ -26,6 +28,7 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
       imageUrl: '/md-auto-images/md2031-hr-passion-plated.png',
     },
     {
+      id: 'md1002',
       brand: 'HONDA',
       name: 'HONDA SHINE RED',
       partNo: 'MD1002',
@@ -34,6 +37,7 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
       imageUrl: '/md-auto-images/md1002-honda-shine-red.png',
     },
     {
+      id: 'md3004',
       brand: 'BAJAJ',
       name: 'BAJAJ COMFORTEC',
       partNo: 'MD3004',
@@ -42,6 +46,7 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
       imageUrl: '/md-auto-images/md3004-bajaj-comfortec.png',
     },
     {
+      id: 'md4003',
       brand: 'TVS',
       name: 'TVS STAR CITY+ RED',
       partNo: 'MD4003',
@@ -51,13 +56,23 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
     },
   ];
 
+  const handleProductClick = (partNo: string, id: string) => {
+    const matched = PRODUCTS.find((p) => p.id === id || p.partNo.toLowerCase() === partNo.toLowerCase());
+    if (matched && onSelectProduct) {
+      onSelectProduct(matched);
+    } else if (setActiveTab) {
+      setActiveTab('products');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 py-12 lg:py-20 relative overflow-hidden" id="featured-products-preview">
+    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 py-12 sm:py-0 sm:h-screen flex flex-col justify-center relative overflow-hidden" id="featured-products-preview">
       {/* Rich Automotive Micro-Dot Grid & Technical Grid Texture */}
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-12 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8 lg:space-y-10 relative z-10 w-full my-auto">
         
         {/* Section Header with Upward Scroll Reveal */}
         <ScrollReveal direction="up" delay={0}>
@@ -72,18 +87,15 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
         </ScrollReveal>
 
         {/* 4 Featured Automotive Catalogue Cards Grid with Staggered Upward Scroll Reveal */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 justify-items-center sm:justify-items-stretch">
           {featuredProducts.map((prod, idx) => (
-            <ScrollReveal key={idx} direction="up" delay={180 + idx * 220}>
+            <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full max-w-[310px] sm:max-w-none">
               <div
-                onClick={() => {
-                  if (setActiveTab) setActiveTab('products');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between hover:border-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer group space-y-4 relative overflow-hidden h-full"
+                onClick={() => handleProductClick(prod.partNo, prod.id)}
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-3 relative overflow-hidden h-full w-full mx-auto"
               >
                 {/* Top Technical Metadata */}
-                <div className="flex items-center justify-between font-sans text-xs pb-3 border-b border-slate-100">
+                <div className="flex items-center justify-between font-sans text-xs pb-2 border-b border-slate-100">
                   <span className="font-extrabold text-red-600 uppercase tracking-wide">{prod.brand}</span>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-3 bg-red-600 rounded-full" />
@@ -92,28 +104,30 @@ export default function FindYourPart({ setActiveTab }: FindYourPartProps) {
                 </div>
 
                 {/* Dedicated Product Photography Visual Area */}
-                <div className="aspect-[4/3] bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div className="h-32 sm:h-36 bg-slate-50 border border-slate-200 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain group-hover:scale-108 transition-transform duration-300"
+                    className="max-h-full max-w-full object-contain scale-[1.8] sm:scale-[1.5] sm:group-hover:scale-[1.6] transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>
 
-                {/* Product Details */}
-                <div className="space-y-1 text-left pt-3 border-t border-slate-100">
-                  <h3 className="text-base sm:text-lg font-black text-slate-900 uppercase font-heading tracking-tight group-hover:text-red-600 transition-colors leading-tight">
-                    {prod.name}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-sans font-medium">
-                    {prod.category}
-                  </p>
+                {/* Product Details & Right-Side View Button */}
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                  <div className="space-y-0.5 text-left min-w-0 flex-1">
+                    <h3 className="text-sm sm:text-base font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
+                      {prod.name}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-sans font-medium truncate">
+                      {prod.category}
+                    </p>
+                  </div>
 
-                  {/* Subtle Text CTA */}
-                  <div className="pt-3 flex items-center gap-1.5 text-xs font-mono font-black text-red-600 uppercase tracking-wider group-hover:text-red-700">
-                    <span>VIEW PRODUCT</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-red-600 group-hover:translate-x-1 transition-transform" />
+                  {/* Compact View CTA Button on Right */}
+                  <div className="flex items-center gap-1 text-[11px] font-mono font-black text-red-600 uppercase tracking-wider bg-red-50 sm:group-hover:bg-red-600 sm:group-hover:text-white px-2.5 py-1.5 rounded-full transition-all duration-300 shrink-0 border border-red-200/80 sm:group-hover:border-red-600 shadow-2xs">
+                    <span>VIEW</span>
+                    <ArrowRight className="w-3 h-3 text-red-600 sm:group-hover:text-white sm:group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>
 

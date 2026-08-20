@@ -21,7 +21,7 @@ export default function CorporateVisionMission() {
           {/* LEFT — VISION CARD */}
           <ScrollReveal direction="up" delay={180}>
             <div className="p-7 sm:p-9 lg:p-12 min-h-[250px] sm:min-h-[280px] bg-white border border-slate-200 border-l-4 border-l-red-600 rounded-3xl shadow-md hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between space-y-5 sm:space-y-6 relative overflow-hidden group h-full">
-              <div className="absolute -bottom-6 -right-6 text-slate-100 font-heading font-black text-6xl sm:text-7xl select-none pointer-events-none opacity-40 group-hover:text-red-50 transition-colors">
+              <div className="absolute -bottom-6 -right-6 text-slate-200 font-heading font-black text-6xl sm:text-7xl select-none pointer-events-none opacity-60 group-hover:text-red-100 transition-colors">
                 VISION
               </div>
 
@@ -41,7 +41,7 @@ export default function CorporateVisionMission() {
           {/* RIGHT — MISSION CARD */}
           <ScrollReveal direction="up" delay={400}>
             <div className="p-7 sm:p-9 lg:p-12 min-h-[250px] sm:min-h-[280px] bg-white border border-slate-200 border-l-4 border-l-slate-900 rounded-3xl shadow-md hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between space-y-5 sm:space-y-6 relative overflow-hidden group h-full">
-              <div className="absolute -bottom-6 -right-6 text-slate-100 font-heading font-black text-6xl sm:text-7xl select-none pointer-events-none opacity-40 group-hover:text-slate-100 transition-colors">
+              <div className="absolute -bottom-6 -right-6 text-slate-200 font-heading font-black text-6xl sm:text-7xl select-none pointer-events-none opacity-60 group-hover:text-slate-200 transition-colors">
                 MISSION
               </div>
 

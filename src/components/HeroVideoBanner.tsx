@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ArrowRightCircle, ShieldCheck, Factory, CheckCircle2, MessageSquare, ArrowRight } from 'lucide-react';
 
 interface HeroVideoBannerProps {
@@ -11,8 +11,51 @@ interface HeroVideoBannerProps {
   onOpenQuoteModal?: () => void;
 }
 
+const CYCLING_PHRASES = [
+  'OUR ROADS',
+  'OUR TERRAIN',
+  'OUR REALITY',
+  'EVERY JOURNEY',
+  'THE ROAD AHEAD',
+];
+
 export default function HeroVideoBanner({ setActiveTab, onOpenQuoteModal }: HeroVideoBannerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullText = CYCLING_PHRASES[currentPhraseIndex] + '.';
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting) {
+      // Typing forward
+      if (displayText.length < fullText.length) {
+        timer = setTimeout(() => {
+          setDisplayText(fullText.slice(0, displayText.length + 1));
+        }, 75);
+      } else {
+        // Pause at completed phrase before backspacing
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 1800);
+      }
+    } else {
+      // Backspacing
+      if (displayText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 35);
+      } else {
+        // Move to next phrase once completely deleted
+        setIsDeleting(false);
+        setCurrentPhraseIndex((prev) => (prev + 1) % CYCLING_PHRASES.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentPhraseIndex]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -41,8 +84,8 @@ export default function HeroVideoBanner({ setActiveTab, onOpenQuoteModal }: Hero
           preload="auto"
           className="w-full h-full object-cover opacity-100 scale-105"
         >
-          <source src="/videos/create_a_video_for_my_motocycl.mp4" type="video/mp4" />
-          <source src="/videos/hlins-expanding-our-legacy.mp4" type="video/mp4" />
+          
+          <source src="/videos/hero video new.mp4" type="video/mp4" />
         </video>
         {/* Slate Gradient Overlay: Solid #0B1322 on left for clear text, fading out to transparent on right for full video visibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1322] via-[#0B1322]/85 via-40% to-transparent" />
@@ -52,18 +95,22 @@ export default function HeroVideoBanner({ setActiveTab, onOpenQuoteModal }: Hero
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 pt-24 sm:pt-16 pb-24 sm:pb-32 lg:pb-40 relative z-10 w-full">
         <div className="max-w-3xl space-y-5 sm:space-y-6">
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F7FA] uppercase leading-[1.05] font-heading">
-            ENGINEERED FOR STABILITY.<br />
-            <span className="text-red-600">BUILT FOR THE ROAD.</span>
+          {/* Headline with typewriter backspace effect in 3-line layout */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-6xl font-black tracking-tight text-[#F5F7FA] uppercase leading-[1.08] font-heading min-h-[3.3em]">
+            ENGINEERED FOR<br />
+            STABILITY.<br />
+            <span className="whitespace-nowrap inline-flex items-baseline">
+              <span>BUILT FOR&nbsp;</span>
+              <span className="text-red-600">{displayText}</span>
+            </span>
           </h1>
 
           {/* Divider Line */}
           <div className="h-1 w-20 bg-red-600 my-3" />
 
           {/* Supporting Copy */}
-          <p className="text-[#AAB4C2] text-xs sm:text-sm font-medium leading-relaxed max-w-2xl">
-            Premium two-wheeler suspension and precision components, engineered for reliable performance and trusted by dealers, distributors, and workshops across India.
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
+Two-wheeler shock absorbers, suspension systems, and precision automobile components, engineered for reliable performance and trusted by dealers, distributors, and workshops across India.
           </p>
 
           {/* Actions: Left-aligned compact buttons, stacked vertically on mobile screens, side-by-side on laptop/desktop */}
