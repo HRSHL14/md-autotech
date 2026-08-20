@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../data';
 import ScrollReveal from './ScrollReveal';
@@ -73,10 +74,10 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10 lg:space-y-12 relative z-10 w-full">
         
-        {/* Section Header with Upward Scroll Reveal */}
+        {/* Section Header with Upward Scroll Reveal - Single line on large screens */}
         <ScrollReveal direction="up" delay={0}>
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight">
+          <div className="text-center max-w-4xl mx-auto space-y-2">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight sm:whitespace-nowrap">
               Explore Our <span className="text-red-600">Suspension Solutions</span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-sans leading-relaxed">
@@ -85,7 +86,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           </div>
         </ScrollReveal>
 
-        {/* 4 Featured Automotive Catalogue Cards Grid: Compact vertical chips snugly containing product image */}
+        {/* 4 Featured Automotive Catalogue Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 max-w-5xl mx-auto justify-center">
           {featuredProducts.map((prod, idx) => (
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
@@ -102,12 +103,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   </div>
                 </div>
 
-                {/* Dedicated Product Photography Visual Area: Tight vertical container */}
+                {/* Dedicated Product Photography Visual Area: Neatly scaled vertical container */}
                 <div className="aspect-[3/4] bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain sm:group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
+                    className="max-h-full max-w-full object-contain scale-[1.3] sm:scale-[1.25] sm:group-hover:scale-[1.32] transition-transform duration-300 drop-shadow-sm"
                     loading="lazy"
                   />
                 </div>
@@ -128,6 +129,22 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
             </ScrollReveal>
           ))}
         </div>
+
+        {/* Common View Products Button at Bottom */}
+        <ScrollReveal direction="up" delay={500}>
+          <div className="text-center flex justify-center pt-2">
+            <button
+              onClick={() => {
+                if (setActiveTab) setActiveTab('products');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="cursor-pointer px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-slate-700"
+            >
+              <span>VIEW ALL PRODUCTS</span>
+              <ArrowRight className="w-4 h-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>
