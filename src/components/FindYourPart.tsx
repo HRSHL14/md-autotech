@@ -113,16 +113,11 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   />
                 </div>
 
-                {/* Product Details */}
-                <div className="pt-2 border-t border-slate-100">
-                  <div className="space-y-0.5 text-left min-w-0">
-                    <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
-                      {prod.name}
-                    </h3>
-                    <p className="text-[10px] sm:text-xs text-slate-500 font-sans font-medium truncate">
-                      {prod.category}
-                    </p>
-                  </div>
+                {/* Product Name */}
+                <div className="pt-2 border-t border-slate-100 text-left">
+                  <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
+                    {prod.name}
+                  </h3>
                 </div>
 
               </div>
