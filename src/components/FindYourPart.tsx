@@ -138,10 +138,10 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 if (setActiveTab) setActiveTab('products');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="cursor-pointer px-9 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-slate-700"
+              className="cursor-pointer px-9 py-3.5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg shadow-red-950/20 hover:shadow-xl transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-red-500/40"
             >
-              <span>VIEW ALL PRODUCTS</span>
-              <ArrowRight className="w-4 h-4 text-red-500 group-hover:translate-x-1 transition-transform" />
+              <span>VIEW PRODUCTS</span>
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </ScrollReveal>
