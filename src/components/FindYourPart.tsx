@@ -72,11 +72,11 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8 lg:space-y-9 relative z-10 w-full my-auto">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-4 sm:space-y-6 lg:space-y-6 relative z-10 w-full my-auto pt-4 sm:pt-6">
         
-        {/* Section Header: Shifted bit up */}
+        {/* Section Header */}
         <ScrollReveal direction="up" delay={0}>
-          <div className="text-center max-w-4xl mx-auto space-y-1.5 -mt-3 sm:-mt-6 lg:-mt-8">
+          <div className="text-center max-w-4xl mx-auto space-y-1.5 pt-1 sm:pt-2">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight sm:whitespace-nowrap">
               Explore Our <span className="text-red-600">Suspension Solutions</span>
             </h2>
@@ -86,7 +86,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           </div>
         </ScrollReveal>
 
-        {/* 4 Featured Automotive Catalogue Cards Grid: Generously sized vertical chips */}
+        {/* 4 Featured Automotive Catalogue Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto justify-center">
           {featuredProducts.map((prod, idx) => (
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
@@ -103,7 +103,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   </div>
                 </div>
 
-                {/* Dedicated Product Photography Visual Area: Generously sized vertical container */}
+                {/* Dedicated Product Photography Visual Area */}
                 <div className="aspect-[3/4] max-h-56 sm:max-h-64 lg:max-h-72 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2.5 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
@@ -130,9 +130,9 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           ))}
         </div>
 
-        {/* Common View Products Button: Pushed further down */}
+        {/* Common View Products Button */}
         <ScrollReveal direction="up" delay={500}>
-          <div className="text-center flex justify-center pt-6 sm:pt-9 lg:pt-10">
+          <div className="text-center flex justify-center pt-3 sm:pt-4 lg:pt-5">
             <button
               onClick={() => {
                 if (setActiveTab) setActiveTab('products');
