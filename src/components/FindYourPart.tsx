@@ -86,13 +86,13 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           </div>
         </ScrollReveal>
 
-        {/* 4 Featured Automotive Catalogue Cards Grid: Scaled up in same proportion */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 max-w-5xl mx-auto justify-center">
+        {/* 4 Featured Automotive Catalogue Cards Grid: Generously sized vertical chips */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto justify-center">
           {featuredProducts.map((prod, idx) => (
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2.5 relative overflow-hidden h-full w-full max-w-[215px] sm:max-w-[245px] lg:max-w-[255px] mx-auto shadow-xs"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-3 relative overflow-hidden h-full w-full max-w-[235px] sm:max-w-[265px] lg:max-w-[280px] mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
                 <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-2 border-b border-slate-100">
@@ -103,12 +103,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   </div>
                 </div>
 
-                {/* Dedicated Product Photography Visual Area: Proportionally enlarged vertical container */}
-                <div className="aspect-[3/4] max-h-52 sm:max-h-60 lg:max-h-64 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
+                {/* Dedicated Product Photography Visual Area: Generously sized vertical container */}
+                <div className="aspect-[3/4] max-h-56 sm:max-h-64 lg:max-h-72 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2.5 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain scale-[1.3] sm:scale-[1.25] sm:group-hover:scale-[1.32] transition-transform duration-300 drop-shadow-sm"
+                    className="max-h-full max-w-full object-contain scale-[1.3] sm:scale-[1.28] sm:group-hover:scale-[1.35] transition-transform duration-300 drop-shadow-sm"
                     loading="lazy"
                   />
                 </div>
@@ -130,15 +130,15 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           ))}
         </div>
 
-        {/* Common View Products Button: Pushed down */}
+        {/* Common View Products Button: Pushed further down */}
         <ScrollReveal direction="up" delay={500}>
-          <div className="text-center flex justify-center pt-4 sm:pt-6 lg:pt-7">
+          <div className="text-center flex justify-center pt-6 sm:pt-9 lg:pt-10">
             <button
               onClick={() => {
                 if (setActiveTab) setActiveTab('products');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="cursor-pointer px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-slate-700"
+              className="cursor-pointer px-9 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center gap-2.5 group border border-slate-700"
             >
               <span>VIEW ALL PRODUCTS</span>
               <ArrowRight className="w-4 h-4 text-red-500 group-hover:translate-x-1 transition-transform" />
