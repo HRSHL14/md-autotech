@@ -104,11 +104,11 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Dedicated Product Photography Visual Area */}
-                <div className="h-44 sm:h-52 bg-slate-50 border border-slate-200 rounded-xl sm:rounded-2xl p-2.5 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div className="h-64 sm:h-72 lg:h-80 bg-slate-50 border border-slate-200 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className="max-h-full max-w-full object-contain scale-[1.1] sm:scale-[1.05] sm:group-hover:scale-[1.15] transition-transform duration-300"
+                    className="max-h-full max-w-full object-contain scale-[1.9] sm:scale-[1.8] sm:group-hover:scale-[1.92] transition-transform duration-300 drop-shadow-md"
                     loading="lazy"
                   />
                 </div>

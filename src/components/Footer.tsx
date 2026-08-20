@@ -187,7 +187,7 @@ export default function Footer({ activeTab = 'home', setActiveTab, onOpenQuoteMo
                   href={officeInfo.directUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute bottom-3 right-3 bg-slate-900/90 hover:bg-red-600 text-white font-mono text-[10px] font-bold px-3 py-1.5 rounded-full border border-white/20 shadow-md backdrop-blur-md transition-all flex items-center gap-1"
+                  className="absolute bottom-3 right-3 bg-red-600 hover:bg-slate-800 text-white font-mono text-[10px] font-bold px-3 py-1.5 rounded-full border border-white/20 shadow-md backdrop-blur-md transition-all flex items-center gap-1"
                 >
                   <span>Open in Maps</span>
                   <ArrowUpRight className="w-3 h-3 text-white" />
