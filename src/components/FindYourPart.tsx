@@ -72,11 +72,11 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-5 sm:space-y-6 lg:space-y-7 relative z-10 w-full my-auto">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8 lg:space-y-9 relative z-10 w-full my-auto">
         
-        {/* Section Header with Upward Scroll Reveal - Single line on large screens */}
+        {/* Section Header: Shifted bit up */}
         <ScrollReveal direction="up" delay={0}>
-          <div className="text-center max-w-4xl mx-auto space-y-1.5">
+          <div className="text-center max-w-4xl mx-auto space-y-1.5 -mt-3 sm:-mt-6 lg:-mt-8">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight sm:whitespace-nowrap">
               Explore Our <span className="text-red-600">Suspension Solutions</span>
             </h2>
@@ -86,25 +86,25 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           </div>
         </ScrollReveal>
 
-        {/* 4 Featured Automotive Catalogue Cards Grid: Sleeker narrower vertical chips */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-4xl mx-auto justify-center">
+        {/* 4 Featured Automotive Catalogue Cards Grid: Scaled up in same proportion */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 max-w-5xl mx-auto justify-center">
           {featuredProducts.map((prod, idx) => (
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2 relative overflow-hidden h-full w-full max-w-[190px] sm:max-w-[215px] mx-auto shadow-xs"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2.5 relative overflow-hidden h-full w-full max-w-[215px] sm:max-w-[245px] lg:max-w-[255px] mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
-                <div className="flex items-center justify-between font-sans text-[10px] sm:text-xs pb-1.5 border-b border-slate-100">
+                <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-2 border-b border-slate-100">
                   <span className="font-extrabold text-red-600 uppercase tracking-wide truncate">{prod.brand}</span>
                   <div className="flex items-center gap-1 shrink-0">
-                    <span className="w-1.5 h-2 bg-red-600 rounded-full" />
-                    <span className="font-mono font-bold text-slate-900 tracking-wider text-[10px] sm:text-xs">{prod.partNo}</span>
+                    <span className="w-1.5 h-2.5 bg-red-600 rounded-full" />
+                    <span className="font-mono font-bold text-slate-900 tracking-wider text-[11px] sm:text-xs">{prod.partNo}</span>
                   </div>
                 </div>
 
-                {/* Dedicated Product Photography Visual Area: Neatly scaled vertical container */}
-                <div className="aspect-[3/4] max-h-44 sm:max-h-52 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-1.5 flex items-center justify-center relative overflow-hidden shadow-inner">
+                {/* Dedicated Product Photography Visual Area: Proportionally enlarged vertical container */}
+                <div className="aspect-[3/4] max-h-52 sm:max-h-60 lg:max-h-64 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
@@ -114,12 +114,12 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Product Details */}
-                <div className="pt-1.5 border-t border-slate-100">
+                <div className="pt-2 border-t border-slate-100">
                   <div className="space-y-0.5 text-left min-w-0">
-                    <h3 className="text-[11px] sm:text-xs font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
+                    <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase font-heading tracking-tight sm:group-hover:text-red-600 transition-colors leading-tight truncate">
                       {prod.name}
                     </h3>
-                    <p className="text-[9px] sm:text-[10px] text-slate-500 font-sans font-medium truncate">
+                    <p className="text-[10px] sm:text-xs text-slate-500 font-sans font-medium truncate">
                       {prod.category}
                     </p>
                   </div>
@@ -130,9 +130,9 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
           ))}
         </div>
 
-        {/* Common View Products Button at Bottom */}
+        {/* Common View Products Button: Pushed down */}
         <ScrollReveal direction="up" delay={500}>
-          <div className="text-center flex justify-center pt-2">
+          <div className="text-center flex justify-center pt-4 sm:pt-6 lg:pt-7">
             <button
               onClick={() => {
                 if (setActiveTab) setActiveTab('products');
