@@ -27,7 +27,6 @@ export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteModalProduct, setQuoteModalProduct] = useState<string>('');
   const [quoteModalBusinessType, setQuoteModalBusinessType] = useState<string>('Dealer');
-  const [selectedProductForCatalogDetail, setSelectedProductForCatalogDetail] = useState<Product | null>(null);
 
   // Handle mobile hardware back button and browser history
   useEffect(() => {
@@ -81,7 +80,6 @@ export default function App() {
   };
 
   const handleSelectProductFromFitment = (product: Product) => {
-    setSelectedProductForCatalogDetail(product);
     handleTabChange('products');
   };
 
@@ -139,7 +137,6 @@ export default function App() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6">
             <ProductCatalog
               onOpenQuoteModal={(prodName) => handleOpenQuoteModal(prodName)}
-              targetProductId={selectedProductForCatalogDetail?.id || null}
             />
           </div>
         )}

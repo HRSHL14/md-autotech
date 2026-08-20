@@ -22,14 +22,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   
-  // Selected product for detailed modal view
-  const [activeDetailProduct, setActiveDetailProduct] = useState<Product | null>(() => {
-    if (targetProductId) {
-      return PRODUCTS.find((p) => p.id === targetProductId) || null;
-    }
-    return null;
-  });
-
   const brands = ['All', 'Hero', 'Honda', 'Bajaj', 'TVS', 'Yamaha'];
   const categories = ['All', 'Rear Shock Absorber', 'Scooter Suspension', 'Front Suspension'];
   const appTypes = ['All', 'Motorcycle', 'Scooter'];
@@ -53,14 +45,13 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (activeDetailProduct) setActiveDetailProduct(null);
-        if (mobileFilterOpen) setMobileFilterOpen(false);
+      if (e.key === 'Escape' && mobileFilterOpen) {
+        setMobileFilterOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeDetailProduct, mobileFilterOpen]);
+  }, [mobileFilterOpen]);
 
   return (
     <div className="w-full space-y-6 sm:space-y-8 bg-[#F8FAFC] border border-slate-200 py-6 sm:py-8 px-4 sm:px-8 max-w-[1440px] mx-auto rounded-3xl mt-20 sm:mt-24 lg:mt-28 mb-8 relative overflow-hidden shadow-xs" id="products-catalog-view">
@@ -270,19 +261,14 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                       </div>
                     </div>
 
-                    {/* Rounded Pill Action Buttons */}
-                    <div className="pt-4 mt-4 border-t border-slate-200 grid grid-cols-2 gap-2.5">
-                      <button
-                        onClick={() => setActiveDetailProduct(prod)}
-                        className="cursor-pointer py-2.5 px-3 border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-800 text-xs font-black uppercase tracking-wider text-center rounded-full transition-all shadow-xs"
-                      >
-                        View Specs
-                      </button>
+                    {/* Rounded Pill Action Button */}
+                    <div className="pt-4 mt-4 border-t border-slate-200">
                       <button
                         onClick={() => onOpenQuoteModal(prod.name)}
-                        className="cursor-pointer py-2.5 px-3 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-xs font-black uppercase tracking-wider text-center rounded-full transition-all shadow-md hover:shadow-lg border border-red-500/40"
+                        className="w-full cursor-pointer py-3 px-4 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-xs font-black uppercase tracking-wider text-center rounded-full transition-all shadow-md hover:shadow-lg border border-red-500/40 flex items-center justify-center gap-2 group/btn"
                       >
-                        Request Quote
+                        <span>REQUEST WHOLESALE QUOTE</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-white group-hover/btn:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>
@@ -390,141 +376,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                 >
                   SHOW {filteredProducts.length} RESULTS
                 </button>
-              </div>
-
-            </div>
-          </div>,
-          document.body
-        )}
-
-        {/* 5. Product Detail Modal */}
-        {activeDetailProduct && createPortal(
-          <div
-            onClick={() => setActiveDetailProduct(null)}
-            className="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 cursor-pointer"
-          >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white border border-slate-200 max-w-4xl w-full max-h-[92vh] overflow-y-auto rounded-3xl p-5 sm:p-8 shadow-2xl relative space-y-4 my-auto cursor-default"
-            >
-              
-              {/* Close CTA Button */}
-              <button
-                onClick={() => setActiveDetailProduct(null)}
-                className="absolute top-5 right-5 px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider rounded-full shadow-md transition-all border border-slate-700 flex items-center gap-1.5 cursor-pointer z-20 group hover:scale-105"
-                aria-label="Close modal"
-              >
-                <span>CLOSE</span>
-                <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-300" />
-              </button>
-
-              {/* Modal Content Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                
-                {/* Left Image Column */}
-                <div className="md:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center justify-between shadow-inner space-y-3 min-h-[300px] sm:min-h-[340px]">
-                  <img
-                    src={activeDetailProduct.imageUrl}
-                    alt={activeDetailProduct.name}
-                    className="max-h-72 sm:max-h-80 w-auto object-contain hover:scale-105 transition-transform duration-300"
-                  />
-                  <span className="px-3 py-1 bg-slate-900 text-white font-mono font-bold text-xs uppercase rounded-full shadow-md">
-                    PART NUMBER: {activeDetailProduct.partNo}
-                  </span>
-                </div>
-
-                {/* Right Detail Column */}
-                <div className="md:col-span-7 space-y-4">
-                  <div>
-                    <span className="px-3 py-0.5 bg-red-50 border border-red-200 text-red-600 font-mono text-[11px] font-bold uppercase rounded-full inline-block">
-                      {activeDetailProduct.brand} AUTOMOTIVE APPLICATION
-                    </span>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase font-heading mt-1 tracking-tight">
-                      {activeDetailProduct.name}
-                    </h2>
-                    <p className="text-xs text-slate-600 mt-0.5 font-sans">
-                      Target Fitment: <strong className="text-slate-900 font-extrabold">{activeDetailProduct.vehicleModel}</strong>
-                    </p>
-                  </div>
-
-                  <p className="text-slate-600 text-xs leading-relaxed font-sans border-y border-slate-200/80 py-2.5">
-                    {activeDetailProduct.longDescription}
-                  </p>
-
-                  {/* Technical Specifications Card */}
-                  <div className="space-y-1.5">
-                    <h4 className="text-[11px] font-mono font-black uppercase tracking-wider text-slate-900">
-                      TECHNICAL SPECIFICATIONS
-                    </h4>
-                    <div className="bg-slate-50/80 border border-slate-200/90 rounded-xl divide-y divide-slate-200/80 text-[11px] font-sans">
-                      <div className="py-2 px-3 flex justify-between">
-                        <span className="text-slate-500 font-medium">Damping Architecture:</span>
-                        <span className="text-slate-900 font-bold">{activeDetailProduct.technicalDetails.dampingType}</span>
-                      </div>
-                      <div className="py-2 px-3 flex justify-between">
-                        <span className="text-slate-500 font-medium">Piston Diameter:</span>
-                        <span className="text-slate-900 font-bold">{activeDetailProduct.technicalDetails.pistonDiameter}</span>
-                      </div>
-                      <div className="py-2 px-3 flex justify-between">
-                        <span className="text-slate-500 font-medium">Stroke Length:</span>
-                        <span className="text-slate-900 font-bold">{activeDetailProduct.technicalDetails.strokeLength}</span>
-                      </div>
-                      <div className="py-2 px-3 flex justify-between">
-                        <span className="text-slate-500 font-medium">Preload Adjustability:</span>
-                        <span className="text-slate-900 font-bold">
-                          {activeDetailProduct.technicalDetails.preloadAdjustable ? 'Multi-Step Notch Adjuster' : 'Standard'}
-                        </span>
-                      </div>
-                      <div className="py-2 px-3 flex justify-between">
-                        <span className="text-slate-500 font-medium">Coil / Spring Finish:</span>
-                        <span className="text-slate-900 font-bold">{activeDetailProduct.springFinish}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Feature Bullet Checklist */}
-                  <div className="space-y-1.5">
-                    <h4 className="text-[11px] font-mono font-black uppercase tracking-wider text-slate-900">
-                      ENGINEERING HIGHLIGHTS
-                    </h4>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-slate-700 font-sans">
-                      {activeDetailProduct.features.map((feat, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
-                          <span className="font-medium text-[11px]">{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Modal Rounded Actions */}
-                  <div className="pt-3 border-t border-slate-200/80 flex flex-col sm:flex-row gap-2.5">
-                    <button
-                      onClick={() => {
-                        const name = activeDetailProduct.name;
-                        setActiveDetailProduct(null);
-                        onOpenQuoteModal(name);
-                      }}
-                      className="flex-1 cursor-pointer py-3 px-5 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-xs uppercase tracking-wider text-center rounded-full shadow-md hover:shadow-lg transition-all border border-red-500/40"
-                    >
-                      Request Wholesale Quote
-                    </button>
-
-                    <a
-                      href={`https://wa.me/917030727770?text=${encodeURIComponent(
-                        `Hello MD AutoTech, I am interested in inquiring about wholesale availability for ${activeDetailProduct.name} (Part #${activeDetailProduct.partNo}).`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cursor-pointer py-3 px-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-full transition-all shadow-md"
-                    >
-                      <MessageSquare className="w-4 h-4 text-white" />
-                      <span>WhatsApp Inquiry</span>
-                    </a>
-                  </div>
-
-                </div>
-
               </div>
 
             </div>
