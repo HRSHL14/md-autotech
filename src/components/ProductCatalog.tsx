@@ -166,7 +166,7 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
-                          className="max-h-full max-w-full object-contain scale-[1.3] sm:scale-[1.28] group-hover:scale-[1.35] transition-transform duration-300 drop-shadow-sm"
+                          className="max-h-full max-w-full object-contain -scale-x-[1.3] sm:-scale-x-[1.28] scale-y-[1.3] sm:scale-y-[1.28] group-hover:-scale-x-[1.35] group-hover:scale-y-[1.35] transition-transform duration-300 drop-shadow-sm"
                           loading="lazy"
                         />
                         <span className="absolute top-3 left-3 px-2.5 py-1 bg-slate-900 text-white font-mono font-bold text-[10px] uppercase rounded-full shadow-sm">
