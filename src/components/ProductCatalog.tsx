@@ -166,7 +166,9 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
-                          className="w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm"
+                          className={`w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm ${
+                            prod.id === 'md4003' ? 'rotate-[10deg]' : ''
+                          }`}
                           loading="lazy"
                         />
                         <span className="absolute top-3 left-3 px-2.5 py-1 bg-slate-900 text-white font-mono font-bold text-[10px] uppercase rounded-full shadow-sm">
