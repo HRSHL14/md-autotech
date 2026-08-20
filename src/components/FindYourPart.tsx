@@ -67,20 +67,20 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
   };
 
   return (
-    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 py-14 sm:py-20 lg:py-24 relative overflow-hidden" id="featured-products-preview">
+    <section className="w-full bg-[#F8FAFC] border-b border-slate-200 min-h-screen py-10 sm:py-0 sm:h-screen flex flex-col justify-center relative overflow-hidden" id="featured-products-preview">
       {/* Rich Automotive Micro-Dot Grid & Technical Grid Texture */}
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10 lg:space-y-12 relative z-10 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-5 sm:space-y-6 lg:space-y-7 relative z-10 w-full my-auto">
         
         {/* Section Header with Upward Scroll Reveal - Single line on large screens */}
         <ScrollReveal direction="up" delay={0}>
-          <div className="text-center max-w-4xl mx-auto space-y-2">
+          <div className="text-center max-w-4xl mx-auto space-y-1.5">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-slate-900 uppercase font-heading tracking-tight leading-tight sm:whitespace-nowrap">
               Explore Our <span className="text-red-600">Suspension Solutions</span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-sans leading-relaxed">
+            <p className="text-slate-600 text-xs sm:text-sm font-sans leading-relaxed">
               A selection of MD AutoTech suspension products developed for popular two-wheeler applications.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
             <ScrollReveal key={idx} direction="up" delay={180 + idx * 180} className="w-full flex justify-center">
               <div
                 onClick={() => handleProductClick(prod.partNo, prod.id)}
-                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-3 relative overflow-hidden h-full w-full max-w-[240px] sm:max-w-[260px] mx-auto shadow-xs"
+                className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between sm:hover:border-red-600 sm:hover:shadow-xl transition-all duration-300 sm:hover:-translate-y-1.5 cursor-pointer group space-y-2.5 relative overflow-hidden h-full w-full max-w-[240px] sm:max-w-[260px] mx-auto shadow-xs"
               >
                 {/* Top Technical Metadata */}
                 <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pb-2 border-b border-slate-100">
@@ -104,7 +104,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                 </div>
 
                 {/* Dedicated Product Photography Visual Area: Neatly scaled vertical container */}
-                <div className="aspect-[3/4] bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div className="aspect-[3/4] max-h-44 sm:max-h-52 bg-slate-50/80 border border-slate-200/80 rounded-xl sm:rounded-2xl p-2 flex items-center justify-center relative overflow-hidden shadow-inner">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
