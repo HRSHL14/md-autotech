@@ -15,22 +15,16 @@ interface ProductCatalogProps {
   targetProductId?: string | null;
 }
 
-export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: ProductCatalogProps) {
+export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps) {
   const [selectedBrand, setSelectedBrand] = useState<string>('All');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedAppType, setSelectedAppType] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   
   const brands = ['All', 'Hero', 'Honda', 'Bajaj', 'TVS', 'Yamaha'];
-  const categories = ['All', 'Rear Shock Absorber', 'Scooter Suspension', 'Front Suspension'];
-  const appTypes = ['All', 'Motorcycle', 'Scooter'];
 
   // Filter products
   const filteredProducts = PRODUCTS.filter((p) => {
     if (selectedBrand !== 'All' && p.brand !== selectedBrand) return false;
-    if (selectedCategory !== 'All' && p.category !== selectedCategory) return false;
-    if (selectedAppType !== 'All' && p.applicationType !== selectedAppType) return false;
 
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
@@ -94,12 +88,10 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                 <Filter className="w-4 h-4 text-red-600" />
                 Catalogue Filters
               </span>
-              {(selectedBrand !== 'All' || selectedCategory !== 'All' || selectedAppType !== 'All' || searchQuery) && (
+              {(selectedBrand !== 'All' || searchQuery) && (
                 <button
                   onClick={() => {
                     setSelectedBrand('All');
-                    setSelectedCategory('All');
-                    setSelectedAppType('All');
                     setSearchQuery('');
                   }}
                   className="text-[11px] font-mono text-slate-500 hover:text-slate-900 underline cursor-pointer"
@@ -108,8 +100,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                 </button>
               )}
             </div>
-
-
 
             {/* Vehicle Brand Filter */}
             <div>
@@ -134,52 +124,6 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
               </div>
             </div>
 
-            {/* Product Category Filter */}
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-2">
-                PRODUCT TYPE
-              </label>
-              <div className="space-y-1">
-                {categories.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setSelectedCategory(c)}
-                    className={`w-full text-left px-3 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer flex items-center justify-between ${
-                      selectedCategory === c
-                        ? 'bg-slate-900 text-white font-bold'
-                        : 'text-slate-700 hover:bg-slate-100'
-                    }`}
-                  >
-                    <span>{c}</span>
-                    {selectedCategory === c && <ChevronRight className="w-3 h-3 text-red-500" />}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Application Type */}
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-2">
-                APPLICATION
-              </label>
-              <div className="space-y-1">
-                {appTypes.map((a) => (
-                  <button
-                    key={a}
-                    onClick={() => setSelectedAppType(a)}
-                    className={`w-full text-left px-3 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer flex items-center justify-between ${
-                      selectedAppType === a
-                        ? 'bg-slate-900 text-white font-bold'
-                        : 'text-slate-700 hover:bg-slate-100'
-                    }`}
-                  >
-                    <span>{a}</span>
-                    {selectedAppType === a && <ChevronRight className="w-3 h-3 text-red-500" />}
-                  </button>
-                ))}
-              </div>
-            </div>
-
           </aside>
 
           {/* Right Products Results Area */}
@@ -191,22 +135,20 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                 SHOWING {filteredProducts.length} PRODUCTS
               </span>
               <span className="text-slate-500 hidden sm:inline">
-                Filtered by: <strong className="text-slate-900">{selectedBrand}</strong> / <strong className="text-slate-900">{selectedCategory}</strong>
+                Filtered by: <strong className="text-slate-900">{selectedBrand}</strong>
               </span>
             </div>
 
             {/* Product Cards Grid */}
             {filteredProducts.length === 0 ? (
               <div className="bg-white border border-slate-200 p-12 text-center rounded-2xl space-y-3">
-                <p className="text-sm font-bold text-slate-700">No suspension products match your filter criteria.</p>
+                <p className="text-slate-500 text-sm font-sans">No suspension parts matched your filter criteria.</p>
                 <button
                   onClick={() => {
                     setSelectedBrand('All');
-                    setSelectedCategory('All');
-                    setSelectedAppType('All');
                     setSearchQuery('');
                   }}
-                  className="px-4 py-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer"
+                  className="px-5 py-2.5 bg-slate-900 text-white text-xs font-bold uppercase rounded-full cursor-pointer hover:bg-slate-800 transition-all"
                 >
                   Clear All Filters
                 </button>
@@ -306,8 +248,11 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                   {brands.map((b) => (
                     <button
                       key={b}
-                      onClick={() => setSelectedBrand(b)}
-                      className={`px-3 py-2 text-xs font-mono font-bold rounded-xl border transition-all cursor-pointer ${
+                      onClick={() => {
+                        setSelectedBrand(b);
+                        setMobileFilterOpen(false);
+                      }}
+                      className={`px-3.5 py-2.5 text-xs font-mono font-bold rounded-xl border transition-all cursor-pointer ${
                         selectedBrand === b
                           ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
                           : 'bg-slate-50 text-slate-700 border-slate-300'
@@ -319,36 +264,13 @@ export default function ProductCatalog({ onOpenQuoteModal, targetProductId }: Pr
                 </div>
               </div>
 
-              {/* Category Pills */}
-              <div className="space-y-1.5">
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
-                  PRODUCT TYPE
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => setSelectedCategory(c)}
-                      className={`px-3 py-2 text-xs font-mono font-bold rounded-xl border transition-all cursor-pointer ${
-                        selectedCategory === c
-                          ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                          : 'bg-slate-50 text-slate-700 border-slate-300'
-                      }`}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* Apply CTA */}
               <div className="pt-3 border-t border-slate-200 flex gap-3">
                 <button
                   onClick={() => {
                     setSelectedBrand('All');
-                    setSelectedCategory('All');
-                    setSelectedAppType('All');
                     setSearchQuery('');
+                    setMobileFilterOpen(false);
                   }}
                   className="px-4 py-3 border border-slate-300 text-slate-700 font-mono font-bold text-xs uppercase rounded-full cursor-pointer"
                 >
