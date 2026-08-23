@@ -10,9 +10,8 @@
 Add-Type -AssemblyName System.Drawing
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$srcDir = Join-Path $projectRoot "public\images vertical"
+$srcDir = Join-Path $projectRoot "public\images-vertical"
 $targetDirs = @(
-    (Join-Path $projectRoot "public\images-vertical"),
     (Join-Path $projectRoot "public\md-auto-images"),
     (Join-Path $projectRoot "public\images\products")
 )
