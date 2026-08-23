@@ -48,24 +48,18 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
   }, [mobileFilterOpen]);
 
   return (
-    <div className="w-full space-y-6 sm:space-y-8 bg-[#F8FAFC] border border-slate-200 py-6 sm:py-8 px-4 sm:px-8 max-w-[1440px] mx-auto rounded-3xl mt-20 sm:mt-24 lg:mt-28 mb-8 relative overflow-hidden shadow-xs" id="products-catalog-view">
+    <div className="w-full space-y-4 sm:space-y-8 bg-[#F8FAFC] border border-slate-200 py-4 sm:py-8 px-2 sm:px-6 lg:px-8 max-w-[1440px] mx-auto rounded-2xl sm:rounded-3xl mt-16 sm:mt-24 lg:mt-28 mb-8 relative overflow-hidden shadow-xs" id="products-catalog-view">
       {/* Texture */}
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
 
-      <div className="relative z-10 space-y-6 sm:space-y-8">
+      <div className="relative z-10 space-y-4 sm:space-y-8">
         
         {/* 1. Page Header */}
-        <div className="border-b border-slate-200 pb-4 sm:pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="border-b border-slate-200 pb-3 sm:pb-6 flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
           <div>
-            <span className="text-xs font-mono font-bold text-red-600 uppercase tracking-widest block mb-1">
-              ✦ B2B AUTOMOTIVE COMPONENT CATALOGUE
-            </span>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 uppercase font-heading tracking-tight">
+            <h1 className="text-xl sm:text-4xl font-extrabold text-slate-900 uppercase font-heading tracking-tight">
               Suspension Products &amp; Applications
             </h1>
-            <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed font-sans">
-              Factory-grade gas-hydraulic shock absorbers, front forks, and replacement damper assemblies engineered for major two-wheeler applications in India.
-            </p>
           </div>
 
           <button
@@ -78,7 +72,7 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
         </div>
 
         {/* 2. Main B2B Catalogue Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 items-start">
           
           {/* Left Filter Sidebar (Hidden on Mobile, Visible on Desktop lg+) */}
           <aside className="hidden lg:block lg:col-span-3 bg-white border border-slate-200/90 p-5 rounded-2xl space-y-6 shadow-xs">
@@ -127,10 +121,10 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
           </aside>
 
           {/* Right Products Results Area */}
-          <main className="lg:col-span-9 space-y-4">
+          <main className="lg:col-span-9 space-y-3 sm:space-y-4">
             
             {/* Results Summary Header */}
-            <div className="flex items-center justify-between bg-white border border-slate-200/90 p-3.5 rounded-2xl text-xs font-mono shadow-xs">
+            <div className="flex items-center justify-between bg-white border border-slate-200/90 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-mono shadow-xs">
               <span className="text-slate-800 font-bold uppercase">
                 SHOWING {filteredProducts.length} PRODUCTS
               </span>
@@ -154,50 +148,45 @@ export default function ProductCatalog({ onOpenQuoteModal }: ProductCatalogProps
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
                 {filteredProducts.map((prod) => (
                   <div
                     key={prod.id}
-                    className="bg-white border border-slate-200 rounded-3xl p-5 hover:border-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden h-full"
+                    onClick={() => onOpenQuoteModal(prod.name)}
+                    className="bg-white border border-slate-200 rounded-xl sm:rounded-3xl p-2 sm:p-4 lg:p-5 hover:border-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden h-full shadow-xs cursor-pointer"
                   >
                     <div>
-                      {/* Image Viewport Container: Exact 934x1400 aspect ratio */}
-                      <div className="aspect-[934/1400] w-full bg-slate-50 border border-slate-200 rounded-2xl mb-3 flex items-center justify-center relative overflow-hidden shadow-inner">
+                      {/* Image Viewport Container: Wider presentation */}
+                      <div className="aspect-[934/1250] sm:aspect-[934/1400] w-full bg-slate-50 border border-slate-200/90 rounded-lg sm:rounded-2xl mb-1.5 sm:mb-3 flex items-center justify-center relative overflow-hidden shadow-inner">
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
-                          className={`w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm ${
-                            prod.id === 'md4003' ? 'rotate-[10deg]' : ''
-                          }`}
+                          className="w-full h-full object-contain scale-120 sm:scale-105 group-hover:scale-125 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-sm"
                           loading="lazy"
                         />
-                        <span className="absolute top-3 left-3 px-2.5 py-1 bg-slate-900 text-white font-mono font-bold text-[10px] uppercase rounded-full shadow-sm">
-                          PART #{prod.partNo}
+                        <span className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/90 backdrop-blur-xs text-white font-mono font-bold text-[8px] sm:text-[10px] uppercase rounded sm:rounded-full shadow-sm">
+                          #{prod.partNo}
                         </span>
                       </div>
 
                       {/* Metadata */}
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between text-xs font-sans">
-                          <span className="font-extrabold text-red-600 uppercase tracking-wide">{prod.brand}</span>
-                          <span className="text-slate-500 font-medium">{prod.category}</span>
+                      <div className="space-y-0.5 sm:space-y-1.5 px-0.5">
+                        <div className="flex items-center justify-between text-[9px] sm:text-xs font-sans">
+                          <span className="font-extrabold text-red-600 uppercase tracking-wide truncate">{prod.brand}</span>
+                          <span className="text-slate-400 font-mono text-[8px] sm:text-[11px] uppercase tracking-wider">{prod.applicationType}</span>
                         </div>
 
-                        <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors line-clamp-1 font-heading">
+                        <h3 className="text-[11px] sm:text-base lg:text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors line-clamp-1 font-heading">
                           {prod.name}
                         </h3>
                       </div>
                     </div>
 
-                    {/* Rounded Pill Action Button */}
-                    <div className="pt-4 mt-4 border-t border-slate-200">
-                      <button
-                        onClick={() => onOpenQuoteModal(prod.name)}
-                        className="w-full cursor-pointer py-3 px-4 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-xs font-black uppercase tracking-wider text-center rounded-full transition-all shadow-md hover:shadow-lg border border-red-500/40 flex items-center justify-center gap-2 group/btn"
-                      >
-                        <span>REQUEST WHOLESALE QUOTE</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-white group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
+                    {/* Component Name in Small Font */}
+                    <div className="pt-1.5 sm:pt-2.5 mt-1.5 sm:mt-2.5 border-t border-slate-100 px-0.5">
+                      <p className="text-[9px] sm:text-xs text-slate-500 font-sans font-medium truncate">
+                        {prod.category}
+                      </p>
                     </div>
                   </div>
                 ))}

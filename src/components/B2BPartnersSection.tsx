@@ -20,7 +20,7 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
       mobileTag: 'DEALERS',
       title: 'SPARE PARTS DEALERS',
       subtitle: 'High-margin two-wheeler suspension spares for your dealership.',
-      image: '/b2b1.jpg',
+      image: '/b2b1.png',
     },
     {
       icon: Building,
@@ -28,7 +28,7 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
       mobileTag: 'DISTRIBUTORS',
       title: 'REGIONAL DISTRIBUTORS',
       subtitle: 'State territory supply rights & bulk container freight.',
-      image: '/b2b2.jpg',
+      image: '/b2b2.png',
     },
     {
       icon: Truck,
@@ -36,7 +36,7 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
       mobileTag: 'RETAILERS',
       title: 'AUTO PARTS RETAILERS',
       subtitle: 'Direct wholesale damper stock packaged for retail counters.',
-      image: '/b2b3.jpg',
+      image: '/b2b3.png',
     },
     {
       icon: Wrench,
@@ -49,7 +49,7 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
   ];
 
   return (
-    <section className="w-full bg-[#F8FAFC] text-slate-900 h-screen h-[100dvh] flex flex-col justify-center border-b border-slate-200 relative overflow-hidden py-2 sm:py-0" id="b2b-partners">
+    <section className="w-full bg-[#F8FAFC] text-slate-900 min-h-screen flex flex-col justify-center border-b border-slate-200 relative overflow-hidden py-12 sm:py-16" id="b2b-partners">
       {/* Rich Automotive Micro-Dot Grid & Technical Grid Texture */}
       <div className="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(#94a3b8_1.2px,transparent_1.2px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -59,10 +59,10 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
         {/* Section Header with Upward Scroll Reveal */}
         <ScrollReveal direction="up" delay={0}>
           <div className="text-center max-w-3xl mx-auto space-y-1 sm:space-y-1.5">
-            <h2 className="text-3xl sm:text-5xl md:text-4xl lg:text-5xl font-black text-slate-900 uppercase tracking-tight font-heading leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 uppercase tracking-tight font-heading leading-tight whitespace-nowrap">
               POWERING TWO-WHEELER <span className="text-red-600">MOBILITY</span>
             </h2>
-            <p className="text-slate-600 text-xs sm:text-sm lg:text-base leading-snug sm:leading-relaxed font-sans max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-snug sm:leading-relaxed font-sans max-w-2xl mx-auto">
               Factory-direct supply of shock absorbers, suspension systems, and automobile components for dealers, distributors, retailers, and service workshops across India.
             </p>
           </div>
@@ -75,8 +75,7 @@ export default function B2BPartnersSection({ onOpenQuoteModal }: B2BPartnersSect
             return (
               <ScrollReveal key={idx} direction="up" delay={180 + idx * 120}>
                 <div
-                  onClick={() => onOpenQuoteModal(card.title)}
-                  className="relative overflow-hidden rounded-2xl sm:rounded-[28px] shadow-md hover:shadow-2xl transition-all duration-500 group cursor-pointer border border-slate-200/50 flex flex-col justify-between p-4 sm:p-5 lg:p-6 aspect-[3/4.2] sm:aspect-[3/4] lg:aspect-[4/4.8] transform hover:-translate-y-1 min-h-[175px] sm:min-h-0"
+                  className="relative overflow-hidden rounded-2xl sm:rounded-[28px] shadow-md hover:shadow-2xl transition-all duration-500 group border border-slate-200/50 flex flex-col justify-between p-4 sm:p-5 lg:p-6 aspect-[3/4.2] sm:aspect-[3/4] lg:aspect-[4/4.8] transform hover:-translate-y-1 min-h-[175px] sm:min-h-0"
                 >
                   {/* Full-Bleed Background Image */}
                   <img

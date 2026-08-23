@@ -108,9 +108,7 @@ export default function FindYourPart({ setActiveTab, onSelectProduct }: FindYour
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
-                    className={`w-full h-full object-contain -scale-x-100 group-hover:-scale-x-105 group-hover:scale-y-105 transition-transform duration-300 drop-shadow-sm ${
-                      prod.id === 'md4003' ? 'rotate-[10deg]' : ''
-                    }`}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                     loading="lazy"
                   />
                 </div>
