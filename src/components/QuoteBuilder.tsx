@@ -52,7 +52,7 @@ export default function QuoteBuilder({ initialProductName = '', initialBusinessT
 - Message: ${message || 'N/A'}`;
 
   const triggerWhatsApp = () => {
-    window.open(`https://wa.me/917030727770?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    window.open(`https://wa.me/917030727770?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
   };
 
   const triggerEmailInvoice = () => {
